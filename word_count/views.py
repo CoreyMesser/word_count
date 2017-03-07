@@ -61,7 +61,7 @@ def word_dict():
     words_d = {} #display words
 
     #open file
-    with open('/Users/cmesser/Development/Word_Counter/HRPG.txt', encoding='utf-8') as word_list:
+    with open('/Users/cmesser/Development/word_count/HRPG.txt', encoding='utf-8') as word_list:
         #split lines
         for a_line in word_list:
             line_n += 1

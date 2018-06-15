@@ -2,9 +2,6 @@ import os
 import sqlite3
 from flask import Flask, g
 
-app = Flask(__name__)
-app.config.from_object(__name__)
-
 #setting override ENV VAR
 app.config.update(dict(
     DATABASE=os.path.join(app.root_path, 'word_count.db'),

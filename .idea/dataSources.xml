@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="word_count.sqlite" uuid="c1d326f2-ad8f-4270-b7c0-bac4c30d79ff">
-      <driver-ref>sqlite.xerial</driver-ref>
+    <data-source source="LOCAL" name="word_count@localhost" uuid="993ce62b-e685-44eb-b9a4-99559ca8977c">
+      <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
-      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:word_count.sqlite</jdbc-url>
-      <driver-properties>
-        <property name="enable_load_extension" value="true" />
-      </driver-properties>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/word_count</jdbc-url>
     </data-source>
   </component>
 </project>

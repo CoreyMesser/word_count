@@ -1,6 +1,7 @@
 import os
 import sqlalchemy
-from word_data.database import db_session as db
+from word_data.database import db_session
+from word_data.models import Dialogue, Paragraph, Sentence, Word
 
 
 class WordCount(object):
@@ -10,16 +11,25 @@ class WordCount(object):
 
     def open_file(self, file):
         with open(file=file, encoding='utf=8') as raw_file:
-            return raw_file
+            pc = Paragraph()
+            db = db_session()
+
+            for chunk in raw_file:
+                split_chunk = chunk.split('   ')
+                pc.paragraph = split_chunk
+                db.add(pc)
+                db.commit()
+            # return raw_file
 
     def parse_file(self, file):
-        self.parse_paragraph(file=file)
+        raw_file = self.open_file(file=file)
+        # self.parse_paragraph(file=raw_file)
         # parse_sentence
         # parse_word
         pass
 
     def parse_paragraph(self, file):
-        # for chunk in file.split('   '):
+
         # not really paragraphs, chunks
         # break apart file by page breaks
         # single sentence "paragraphs" are fine, this is a top level id
@@ -28,6 +38,12 @@ class WordCount(object):
         pass
 
     def parse_sentence(self, chunk):
+        # sl = Sentence()
+        #
+        # p_chunk = db.query(Paragraph).filter_by(id()).first
+        #
+        # for line in p_chunk
+
         # query db for paragraph chunk
         # break apart paragraph by punctuation
         # dialogue parser - speaker should be included

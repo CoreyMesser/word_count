@@ -11,14 +11,13 @@ class WordCount(object):
 
     def open_file(self, file):
         with open(file=file, encoding='utf=8') as raw_file:
-            pc = Paragraph()
             db = db_session()
 
             for chunk in raw_file:
-                split_chunk = chunk.split('   ')
-                pc.paragraph = split_chunk
+                cs = chunk.split('   ')
+                pc = Paragraph(paragraph=cs)
                 db.add(pc)
-                db.commit()
+            db.commit()
             # return raw_file
 
     def parse_file(self, file):

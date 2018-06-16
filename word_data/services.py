@@ -12,11 +12,11 @@ class WordCount(object):
     def open_file(self, file):
         with open(file=file, encoding='utf=8') as raw_file:
             db = db_session()
-
             for chunk in raw_file:
                 cs = chunk.split('   ')
                 pc = Paragraph(paragraph=cs)
                 db.add(pc)
+                self.parse_sentence(chunk=cs)
             db.commit()
             # return raw_file
 
@@ -37,11 +37,21 @@ class WordCount(object):
         pass
 
     def parse_sentence(self, chunk):
-        # sl = Sentence()
-        #
-        # p_chunk = db.query(Paragraph).filter_by(id()).first
-        #
-        # for line in p_chunk
+        db = db_session()
+        try:
+            # cs = chunk.split('. ')
+            # p_id = db.query(Paragraph).filter_by(id()).first
+            for line in chunk:
+                ls = line.split('. ')
+                for sent in ls:
+                    sl = Sentence(sentence=sent)
+                    db.add(sl)
+                    self.parse_word(line=sent)
+        except AttributeError:
+            sl = Sentence(sentence=chunk)
+            db.add(sl)
+            self.parse_word(line=chunk)
+        db.commit()
 
         # query db for paragraph chunk
         # break apart paragraph by punctuation
@@ -52,9 +62,15 @@ class WordCount(object):
         pass
 
     def parse_word(self, line):
+        db = db_session()
+        ws = line.split(' ')
+        for word in ws:
+            sw = Word(word=word)
+            db.add(sw)
+        db.commit()
         # query db for sentence lines
         # break apart words
-        pass
+
 
     def dialogue_parser(self, query):
         # if

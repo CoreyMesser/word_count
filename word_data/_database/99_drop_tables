@@ -1,5 +1,5 @@
-DROP TABLE public.paragraph;
-DROP TABLE public.sentence;
 DROP TABLE public.dialogue;
 DROP TABLE public.word;
+DROP TABLE public.sentence;
+DROP TABLE public.paragraph;
 DROP FUNCTION public.now_utc()

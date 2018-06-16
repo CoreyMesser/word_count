@@ -20,36 +20,36 @@ CREATE TABLE paragraph
 CREATE TABLE sentence
 (
   id              SERIAL PRIMARY KEY      NOT NULL,
-  paragraph_id    INT                     NOT NULL,
+--   paragraph_id    INT                     NOT NULL,
   sentence        TEXT                    NOT NULL,
   updated_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now_utc(),
   created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now_utc(),
   CHECK (EXTRACT(TIMEZONE FROM updated_at) = '0'),
-  CHECK (EXTRACT(TIMEZONE FROM created_at) = '0'),
+  CHECK (EXTRACT(TIMEZONE FROM created_at) = '0')
 
-  FOREIGN KEY (paragraph_id) REFERENCES paragraph(id)
+--   FOREIGN KEY (paragraph_id) REFERENCES paragraph(id)
 );
 
 CREATE TABLE dialogue
 (
   id              SERIAL PRIMARY KEY      NOT NULL,
-  paragraph_id    INT                     NOT NULL,
+--   paragraph_id    INT                     NOT NULL,
   dialogue        TEXT                    NOT NULL,
-  sentence_ids    INT                     NOT NULL,
+--   sentence_ids    INT                     NOT NULL,
   updated_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now_utc(),
   created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now_utc(),
   CHECK (EXTRACT(TIMEZONE FROM updated_at) = '0'),
-  CHECK (EXTRACT(TIMEZONE FROM created_at) = '0'),
+  CHECK (EXTRACT(TIMEZONE FROM created_at) = '0')
 
-  FOREIGN KEY (paragraph_id) REFERENCES paragraph(id),
-  FOREIGN KEY (sentence_ids) REFERENCES sentence(id)
+--   FOREIGN KEY (paragraph_id) REFERENCES paragraph(id),
+--   FOREIGN KEY (sentence_ids) REFERENCES sentence(id)
 
 );
 
 CREATE TABLE word
 (
   id         SERIAL PRIMARY KEY       NOT NULL,
-  sentence_id       INT                     NOT NULL,
+--   sentence_id       INT                     NOT NULL,
   word       TEXT                     NOT NULL,
   updated_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now_utc(),
   created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now_utc(),

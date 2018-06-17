@@ -1,5 +1,6 @@
 import os
 import sqlalchemy
+import re
 from word_data.database import db_session
 from word_data.models import Dialogue, Paragraph, Sentence, Word
 
@@ -13,10 +14,10 @@ class WordCount(object):
         with open(file=file, encoding='utf=8') as raw_file:
             db = db_session()
             for chunk in raw_file:
-                cs = chunk.split('   ')
-                pc = Paragraph(paragraph=cs)
-                db.add(pc)
-                self.parse_sentence(chunk=cs)
+                if len(chunk) > 1:
+                    pc = Paragraph(paragraph=chunk)
+                    db.add(pc)
+                    self.parse_sentence(chunk=chunk)
             db.commit()
             # return raw_file
 
@@ -38,19 +39,15 @@ class WordCount(object):
 
     def parse_sentence(self, chunk):
         db = db_session()
-        try:
-            # cs = chunk.split('. ')
-            # p_id = db.query(Paragraph).filter_by(id()).first
-            for line in chunk:
-                ls = line.split('. ')
-                for sent in ls:
-                    sl = Sentence(sentence=sent)
-                    db.add(sl)
-                    self.parse_word(line=sent)
-        except AttributeError:
-            sl = Sentence(sentence=chunk)
-            db.add(sl)
-            self.parse_word(line=chunk)
+        rs = re.split('[.?!]', chunk)
+        # p_id = db.query(Paragraph).filter_by(id()).first
+        for line in rs:
+            if line == '/n':
+                continue
+            else:
+                sl = Sentence(sentence=line.lstrip())
+                db.add(sl)
+                self.parse_word(line=line.lstrip())
         db.commit()
 
         # query db for paragraph chunk
@@ -75,6 +72,11 @@ class WordCount(object):
     def dialogue_parser(self, query):
         # if
         pass
+
+    def stripper(self, strip):
+        for string in strip:
+            strip_string = string.lstrip()
+            return strip_string
 
     # def word_dict(self):
     #     db = get_db()

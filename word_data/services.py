@@ -1,6 +1,8 @@
 import os
 import sqlalchemy
-from word_data.database import db_session as db
+import re
+from word_data.database import db_session
+from word_data.models import Dialogue, Paragraph, Sentence, Word
 
 
 class WordCount(object):
@@ -10,16 +12,24 @@ class WordCount(object):
 
     def open_file(self, file):
         with open(file=file, encoding='utf=8') as raw_file:
-            return raw_file
+            db = db_session()
+            for chunk in raw_file:
+                if len(chunk) > 1:
+                    pc = Paragraph(paragraph=chunk)
+                    db.add(pc)
+                    self.parse_sentence(chunk=chunk)
+            db.commit()
+            # return raw_file
 
     def parse_file(self, file):
-        self.parse_paragraph(file=file)
+        raw_file = self.open_file(file=file)
+        # self.parse_paragraph(file=raw_file)
         # parse_sentence
         # parse_word
         pass
 
     def parse_paragraph(self, file):
-        # for chunk in file.split('   '):
+
         # not really paragraphs, chunks
         # break apart file by page breaks
         # single sentence "paragraphs" are fine, this is a top level id
@@ -28,6 +38,18 @@ class WordCount(object):
         pass
 
     def parse_sentence(self, chunk):
+        db = db_session()
+        rs = re.split('[.?!]', chunk)
+        # p_id = db.query(Paragraph).filter_by(id()).first
+        for line in rs:
+            if line == '/n':
+                continue
+            else:
+                sl = Sentence(sentence=line.lstrip())
+                db.add(sl)
+                self.parse_word(line=line.lstrip())
+        db.commit()
+
         # query db for paragraph chunk
         # break apart paragraph by punctuation
         # dialogue parser - speaker should be included
@@ -37,13 +59,24 @@ class WordCount(object):
         pass
 
     def parse_word(self, line):
+        db = db_session()
+        ws = line.split(' ')
+        for word in ws:
+            sw = Word(word=word)
+            db.add(sw)
+        db.commit()
         # query db for sentence lines
         # break apart words
-        pass
+
 
     def dialogue_parser(self, query):
         # if
         pass
+
+    def stripper(self, strip):
+        for string in strip:
+            strip_string = string.lstrip()
+            return strip_string
 
     # def word_dict(self):
     #     db = get_db()

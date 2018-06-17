@@ -88,7 +88,8 @@
     <schema id="17" parent="3" name="public">
       <ObjectId>2200</ObjectId>
       <Comment>standard public schema</Comment>
-      <IntrospectionTimestamp>2018-06-14.23:25:32.672</IntrospectionTimestamp>
+      <IntrospectionTimestamp>2018-06-16.23:12:17.722</IntrospectionTimestamp>
+      <IntrospectionStateNumber>5341</IntrospectionStateNumber>
       <Current>1</Current>
       <Visible>1</Visible>
     </schema>
@@ -134,5 +135,277 @@
       <HandlerId>335</HandlerId>
       <Type>index</Type>
     </access-method>
+    <sequence id="24" parent="17" name="dialogue_id_seq">
+      <ObjectId>17299</ObjectId>
+      <StateNumber>5340</StateNumber>
+      <SequenceIdentity>1..2147483647</SequenceIdentity>
+      <BelongsToColumn>1</BelongsToColumn>
+      <CacheSize>1</CacheSize>
+      <DataType>integer</DataType>
+    </sequence>
+    <sequence id="25" parent="17" name="paragraph_id_seq">
+      <ObjectId>17269</ObjectId>
+      <StateNumber>5338</StateNumber>
+      <SequenceIdentity>1..2147483647</SequenceIdentity>
+      <BelongsToColumn>1</BelongsToColumn>
+      <CacheSize>1</CacheSize>
+      <DataType>integer</DataType>
+    </sequence>
+    <sequence id="26" parent="17" name="sentence_id_seq">
+      <ObjectId>17284</ObjectId>
+      <StateNumber>5339</StateNumber>
+      <SequenceIdentity>1..2147483647</SequenceIdentity>
+      <BelongsToColumn>1</BelongsToColumn>
+      <CacheSize>1</CacheSize>
+      <DataType>integer</DataType>
+    </sequence>
+    <sequence id="27" parent="17" name="word_id_seq">
+      <ObjectId>17314</ObjectId>
+      <StateNumber>5341</StateNumber>
+      <SequenceIdentity>1..2147483647</SequenceIdentity>
+      <BelongsToColumn>1</BelongsToColumn>
+      <CacheSize>1</CacheSize>
+      <DataType>integer</DataType>
+    </sequence>
+    <table id="28" parent="17" name="dialogue">
+      <ObjectId>17301</ObjectId>
+      <StateNumber>5340</StateNumber>
+    </table>
+    <table id="29" parent="17" name="paragraph">
+      <ObjectId>17271</ObjectId>
+      <StateNumber>5338</StateNumber>
+    </table>
+    <table id="30" parent="17" name="sentence">
+      <ObjectId>17286</ObjectId>
+      <StateNumber>5339</StateNumber>
+    </table>
+    <table id="31" parent="17" name="word">
+      <ObjectId>17316</ObjectId>
+      <StateNumber>5341</StateNumber>
+    </table>
+    <routine id="32" parent="17" name="now_utc">
+      <ObjectId>17268</ObjectId>
+      <StateNumber>5337</StateNumber>
+      <VolatilityKind>volatile</VolatilityKind>
+      <ResultsDefinition>timestamp with time zone</ResultsDefinition>
+      <LanguageName>sql</LanguageName>
+      <RoutineKind>function</RoutineKind>
+      <Cost>100.0</Cost>
+    </routine>
+    <column id="33" parent="28" name="id">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>5340</StateNumber>
+      <DefaultExpression>nextval(&apos;dialogue_id_seq&apos;::regclass)</DefaultExpression>
+      <TypeId>23</TypeId>
+      <SequenceName>dialogue_id_seq</SequenceName>
+    </column>
+    <column id="34" parent="28" name="dialogue">
+      <Position>2</Position>
+      <DataType>text|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>5340</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="35" parent="28" name="updated_at">
+      <Position>3</Position>
+      <DataType>timestamp with time zone|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>5340</StateNumber>
+      <DefaultExpression>now_utc()</DefaultExpression>
+      <TypeId>1184</TypeId>
+    </column>
+    <column id="36" parent="28" name="created_at">
+      <Position>4</Position>
+      <DataType>timestamp with time zone|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>5340</StateNumber>
+      <DefaultExpression>now_utc()</DefaultExpression>
+      <TypeId>1184</TypeId>
+    </column>
+    <index id="37" parent="28" name="dialogue_pkey">
+      <ObjectId>17312</ObjectId>
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="38" parent="28" name="dialogue_pkey">
+      <ObjectId>17313</ObjectId>
+      <ColNames>id</ColNames>
+      <UnderlyingIndexName>dialogue_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <check id="39" parent="28" name="dialogue_updated_at_check">
+      <ObjectId>17307</ObjectId>
+      <ColNames>updated_at</ColNames>
+      <Predicate>date_part(&apos;timezone&apos;::text, updated_at) = &apos;0&apos;::double precision</Predicate>
+    </check>
+    <check id="40" parent="28" name="dialogue_created_at_check">
+      <ObjectId>17308</ObjectId>
+      <ColNames>created_at</ColNames>
+      <Predicate>date_part(&apos;timezone&apos;::text, created_at) = &apos;0&apos;::double precision</Predicate>
+    </check>
+    <column id="41" parent="29" name="id">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>5338</StateNumber>
+      <DefaultExpression>nextval(&apos;paragraph_id_seq&apos;::regclass)</DefaultExpression>
+      <TypeId>23</TypeId>
+      <SequenceName>paragraph_id_seq</SequenceName>
+    </column>
+    <column id="42" parent="29" name="paragraph">
+      <Position>2</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>5338</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="43" parent="29" name="updated_at">
+      <Position>3</Position>
+      <DataType>timestamp with time zone|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>5338</StateNumber>
+      <DefaultExpression>now_utc()</DefaultExpression>
+      <TypeId>1184</TypeId>
+    </column>
+    <column id="44" parent="29" name="created_at">
+      <Position>4</Position>
+      <DataType>timestamp with time zone|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>5338</StateNumber>
+      <DefaultExpression>now_utc()</DefaultExpression>
+      <TypeId>1184</TypeId>
+    </column>
+    <index id="45" parent="29" name="paragraph_pkey">
+      <ObjectId>17282</ObjectId>
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="46" parent="29" name="paragraph_pkey">
+      <ObjectId>17283</ObjectId>
+      <ColNames>id</ColNames>
+      <UnderlyingIndexName>paragraph_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <check id="47" parent="29" name="paragraph_updated_at_check">
+      <ObjectId>17277</ObjectId>
+      <ColNames>updated_at</ColNames>
+      <Predicate>date_part(&apos;timezone&apos;::text, updated_at) = &apos;0&apos;::double precision</Predicate>
+    </check>
+    <check id="48" parent="29" name="paragraph_created_at_check">
+      <ObjectId>17278</ObjectId>
+      <ColNames>created_at</ColNames>
+      <Predicate>date_part(&apos;timezone&apos;::text, created_at) = &apos;0&apos;::double precision</Predicate>
+    </check>
+    <column id="49" parent="30" name="id">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>5339</StateNumber>
+      <DefaultExpression>nextval(&apos;sentence_id_seq&apos;::regclass)</DefaultExpression>
+      <TypeId>23</TypeId>
+      <SequenceName>sentence_id_seq</SequenceName>
+    </column>
+    <column id="50" parent="30" name="sentence">
+      <Position>2</Position>
+      <DataType>text|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>5339</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="51" parent="30" name="updated_at">
+      <Position>3</Position>
+      <DataType>timestamp with time zone|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>5339</StateNumber>
+      <DefaultExpression>now_utc()</DefaultExpression>
+      <TypeId>1184</TypeId>
+    </column>
+    <column id="52" parent="30" name="created_at">
+      <Position>4</Position>
+      <DataType>timestamp with time zone|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>5339</StateNumber>
+      <DefaultExpression>now_utc()</DefaultExpression>
+      <TypeId>1184</TypeId>
+    </column>
+    <index id="53" parent="30" name="sentence_pkey">
+      <ObjectId>17297</ObjectId>
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="54" parent="30" name="sentence_pkey">
+      <ObjectId>17298</ObjectId>
+      <ColNames>id</ColNames>
+      <UnderlyingIndexName>sentence_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <check id="55" parent="30" name="sentence_updated_at_check">
+      <ObjectId>17292</ObjectId>
+      <ColNames>updated_at</ColNames>
+      <Predicate>date_part(&apos;timezone&apos;::text, updated_at) = &apos;0&apos;::double precision</Predicate>
+    </check>
+    <check id="56" parent="30" name="sentence_created_at_check">
+      <ObjectId>17293</ObjectId>
+      <ColNames>created_at</ColNames>
+      <Predicate>date_part(&apos;timezone&apos;::text, created_at) = &apos;0&apos;::double precision</Predicate>
+    </check>
+    <column id="57" parent="31" name="id">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>5341</StateNumber>
+      <DefaultExpression>nextval(&apos;word_id_seq&apos;::regclass)</DefaultExpression>
+      <TypeId>23</TypeId>
+      <SequenceName>word_id_seq</SequenceName>
+    </column>
+    <column id="58" parent="31" name="word">
+      <Position>2</Position>
+      <DataType>text|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>5341</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="59" parent="31" name="updated_at">
+      <Position>3</Position>
+      <DataType>timestamp with time zone|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>5341</StateNumber>
+      <DefaultExpression>now_utc()</DefaultExpression>
+      <TypeId>1184</TypeId>
+    </column>
+    <column id="60" parent="31" name="created_at">
+      <Position>4</Position>
+      <DataType>timestamp with time zone|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>5341</StateNumber>
+      <DefaultExpression>now_utc()</DefaultExpression>
+      <TypeId>1184</TypeId>
+    </column>
+    <index id="61" parent="31" name="word_pkey">
+      <ObjectId>17327</ObjectId>
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="62" parent="31" name="word_pkey">
+      <ObjectId>17328</ObjectId>
+      <ColNames>id</ColNames>
+      <UnderlyingIndexName>word_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <check id="63" parent="31" name="word_updated_at_check">
+      <ObjectId>17322</ObjectId>
+      <ColNames>updated_at</ColNames>
+      <Predicate>date_part(&apos;timezone&apos;::text, updated_at) = &apos;0&apos;::double precision</Predicate>
+    </check>
+    <check id="64" parent="31" name="word_created_at_check">
+      <ObjectId>17323</ObjectId>
+      <ColNames>created_at</ColNames>
+      <Predicate>date_part(&apos;timezone&apos;::text, created_at) = &apos;0&apos;::double precision</Predicate>
+    </check>
+    <argument id="65" parent="32">
+      <ArgumentDirection>R</ArgumentDirection>
+      <DataType>timestamp with time zone|0s</DataType>
+    </argument>
   </database-model>
 </dataSource>

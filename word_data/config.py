@@ -3,4 +3,5 @@ from word_data.constants import SystemConstants
 
 
 class Config(object):
-    DATABASE_URI = os.environ.get(SystemConstants.DATABASE_URI)
+    sc = SystemConstants()
+    DATABASE_URI = os.getenv('DATABASE_URI')

@@ -8,18 +8,19 @@ from word_data.models import Dialogue, Paragraph, Sentence, Word
 class WordCount(object):
 
     def __init__(self):
-        pass
+        self.db_service = DatabaseServices()
 
     def open_file(self, file):
         with open(file=file, encoding='utf=8') as raw_file:
             db = db_session()
             for chunk in raw_file:
                 if len(chunk) > 1:
-                    pc = Paragraph(paragraph=chunk)
+                    pc = Paragraph()
+                    pc.paragraph = chunk
                     db.add(pc)
-                    self.parse_sentence(chunk=chunk)
-            db.commit()
-            # return raw_file
+                    db.commit()
+                    paragraph_id = self.db_service.get_id(tab=Paragraph, col=Paragraph.paragraph, string=chunk)
+                    self.parse_sentence(chunk=chunk, paragraph_id=paragraph_id)
 
     def parse_file(self, file):
         raw_file = self.open_file(file=file)
@@ -37,18 +38,20 @@ class WordCount(object):
         # write to db
         pass
 
-    def parse_sentence(self, chunk):
+    def parse_sentence(self, chunk, paragraph_id):
         db = db_session()
         rs = re.split('[.?!]', chunk)
-        # p_id = db.query(Paragraph).filter_by(id()).first
         for line in rs:
-            if line == '/n':
+            if line == '\n':
                 continue
             else:
-                sl = Sentence(sentence=line.lstrip())
+                sl = Sentence()
+                sl.sentence = line.lstrip()
+                sl.paragraph_id = paragraph_id
                 db.add(sl)
-                self.parse_word(line=line.lstrip())
-        db.commit()
+                db.commit()
+                sentence_id = self.db_service.get_id(tab=Sentence, col=Sentence.sentence, string=line.lstrip())
+                self.parse_word(line=line.lstrip(), sentence_id=sentence_id)
 
         # query db for paragraph chunk
         # break apart paragraph by punctuation
@@ -58,11 +61,13 @@ class WordCount(object):
         # write to db
         pass
 
-    def parse_word(self, line):
+    def parse_word(self, line, sentence_id):
         db = db_session()
         ws = line.split(' ')
         for word in ws:
-            sw = Word(word=word)
+            sw = Word()
+            sw.word = word
+            sw.sentence_id = sentence_id
             db.add(sw)
         db.commit()
         # query db for sentence lines
@@ -77,6 +82,14 @@ class WordCount(object):
         for string in strip:
             strip_string = string.lstrip()
             return strip_string
+
+
+class DatabaseServices(object):
+
+    def get_id(self, tab, col, string):
+        db = db_session()
+        row = db.query(tab).filter(col == string).first()
+        return row.id
 
     # def word_dict(self):
     #     db = get_db()

@@ -46,7 +46,7 @@ CREATE TABLE dialogue
 
 );
 
-CREATE TABLE word
+CREATE TABLE words
 (
   id         SERIAL PRIMARY KEY       NOT NULL,
   sentence_id       INT                     NOT NULL,

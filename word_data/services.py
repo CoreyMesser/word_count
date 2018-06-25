@@ -1,6 +1,6 @@
 import re
 from word_data.database import db_session
-from word_data.models import Dialogue, Paragraph, Sentence, Word
+from word_data.models import Dialogue, Paragraph, Sentence, Words
 
 
 class WordCount(object):
@@ -59,7 +59,7 @@ class WordCount(object):
         db = db_session()
         ws = line.split(' ')
         for word in ws:
-            sw = Word()
+            sw = Words()
             sw.word = word
             sw.sentence_id = sentence_id
             db.add(sw)
@@ -68,8 +68,9 @@ class WordCount(object):
         # break apart words
 
     def dialogue_parser(self, chunk, paragraph_id):
-        # dialogue parser - speaker should be included
-        # should already come chunked
+        db = db_session()
+        diag = re.search(r'\"', chunk).group()
+
         pass
 
     def stripper(self, strip):

@@ -19,8 +19,8 @@ class Paragraph(Base):
     created_at = Column(DateTime(True), nullable=False, server_default=text("now_utc()"))
 
 
-class Word(Base):
-    __tablename__ = 'word'
+class Words(Base):
+    __tablename__ = 'words'
     __table_args__ = (
         CheckConstraint("date_part('timezone'::text, created_at) = '0'::double precision"),
         CheckConstraint("date_part('timezone'::text, updated_at) = '0'::double precision")

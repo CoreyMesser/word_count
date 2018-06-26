@@ -59,6 +59,7 @@ class WordCount(object):
         db = db_session()
         ws = line.split(' ')
         for word in ws:
+            word = self.comma_stripper(strip=word)
             sw = Words()
             sw.word = word
             sw.sentence_id = sentence_id
@@ -77,6 +78,14 @@ class WordCount(object):
         """General service white space stripper"""
         for string in strip:
             return string.lstrip()
+
+    def comma_stripper(self, strip):
+        """Strips commas from individual words"""
+        comma = re.search(r',', strip)
+        if comma:
+            return strip.split(',')[0]
+        else:
+            return strip
 
 
 class DatabaseServices(object):

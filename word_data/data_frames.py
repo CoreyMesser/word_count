@@ -24,25 +24,34 @@ class Reports(object):
         words = pd.read_sql_query('SELECT word, COUNT(1) FROM words GROUP BY word', en)
         self.create_data_frame(query=words)
 
-
-    def average_sentence_length(self):
-        sentence = pd.read_sql_query('SELECT LENGTH(sentence), sentence FROM sentence', en)
+    def sentence_length(self):
+        sentence = pd.read_sql_query('select sentence.id, count(words.sentence_id), sentence from words join sentence on sentence.id = sentence_id group by sentence.id order by sentence.id asc', en)
         # sentence_words = pd.read_sql_query('SELECT LENGTH(sentence), sentence FROM sentence INNER JOIN words on words.id = sentence.id', en)
-
         self.create_data_frame(query=sentence)
 
+    def word_length(self):
+        word_len = pd.read_sql_query('select sentence_id, length(words.word) as word_len, word from words', en)
+        self.create_data_frame(query=word_len)
+
+    def average_complexity_score(self):
+        complexity_score = pd.read_sql_query('', en)
+        # calculate word len
+        # calculate sentence len
+        # add up word total for sentence / by sentence len
 
 if __name__ == '__main__':
     rep = Reports()
-    rep.average_sentence_length()
+    rep.word_length()
 
-#sentence length
-#average sentence length
-#largest average word in sentence
+# sentence length
+# average sentence length
+# largest average word in sentence
 #
-#sentence patterns
-#word patterns in sentence
-#beats
+# sentence patterns
+# word patterns in sentence
+# beats
+# number of similar/same words in a sentence
+# complexity of word/ length
 #
-#syllyables per word, per sentence
-#iambic pentameter
+# syllyables per word, per sentence
+# iambic pentameter

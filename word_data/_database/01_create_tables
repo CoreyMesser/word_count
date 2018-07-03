@@ -3,56 +3,69 @@ CREATE FUNCTION now_utc()
   RETURNS TIMESTAMP WITH TIME ZONE AS $$
 SET LOCAL TIMEZONE = 'UTC';
 SELECT now();
-$$ LANGUAGE SQL;
+$$
+LANGUAGE SQL;
 
 -- regular table structure
 
 CREATE TABLE paragraph
 (
-  id         SERIAL PRIMARY KEY           NOT NULL,
-  paragraph       TEXT                    NULL,
-  updated_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now_utc(),
-  created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now_utc(),
+  id                   SERIAL PRIMARY KEY           NOT NULL,
+  paragraph                    TEXT                     NULL,
+  paragraph_length_by_sentence INT                      NULL,
+  paragraph_length_by_word     INT                      NULL,
+  flesch_reading_ease          INT                      NULL,
+  flesch_kincaid_grade         INT                      NULL,
+  updated_at                   TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now_utc(),
+  created_at                   TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now_utc(),
   CHECK (EXTRACT(TIMEZONE FROM updated_at) = '0'),
   CHECK (EXTRACT(TIMEZONE FROM created_at) = '0')
 );
 
 CREATE TABLE sentence
 (
-  id              SERIAL PRIMARY KEY      NOT NULL,
-  paragraph_id    INT                     NOT NULL,
-  sentence        TEXT                    NOT NULL,
-  updated_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now_utc(),
-  created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now_utc(),
+  id                   SERIAL PRIMARY KEY       NOT NULL,
+  paragraph_id         INT                      NOT NULL,
+  sentence             TEXT                     NOT NULL,
+  sentence_length      INT                      NOT NULL,
+  flesch_reading_ease  INT                      NULL,
+  flesch_kincaid_grade INT                      NULL,
+  updated_at           TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now_utc(),
+  created_at           TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now_utc(),
   CHECK (EXTRACT(TIMEZONE FROM updated_at) = '0'),
   CHECK (EXTRACT(TIMEZONE FROM created_at) = '0'),
 
-  FOREIGN KEY (paragraph_id) REFERENCES paragraph(id)
+  FOREIGN KEY (paragraph_id) REFERENCES paragraph (id)
 );
 
 CREATE TABLE dialogue
 (
-  id              SERIAL PRIMARY KEY      NOT NULL,
-  paragraph_id    INT                     NOT NULL,
-  dialogue        TEXT                    NOT NULL,
-  sentence_ids    INT                     NOT NULL,
-  updated_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now_utc(),
-  created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now_utc(),
+  id                   SERIAL PRIMARY KEY       NOT NULL,
+  paragraph_id         INT                      NOT NULL,
+  dialogue             TEXT                     NOT NULL,
+  dialogue_length      INT                      NOT NULL,
+  flesch_reading_ease  INT                      NULL,
+  flesch_kincaid_grade INT                      NULL,
+  sentence_ids         INT                      NOT NULL,
+  updated_at           TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now_utc(),
+  created_at           TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now_utc(),
   CHECK (EXTRACT(TIMEZONE FROM updated_at) = '0'),
   CHECK (EXTRACT(TIMEZONE FROM created_at) = '0'),
 
-  FOREIGN KEY (paragraph_id) REFERENCES paragraph(id),
-  FOREIGN KEY (sentence_ids) REFERENCES sentence(id)
+  FOREIGN KEY (paragraph_id) REFERENCES paragraph (id),
+  FOREIGN KEY (sentence_ids) REFERENCES sentence (id)
 
 );
 
-CREATE TABLE word
+CREATE TABLE words
 (
-  id         SERIAL PRIMARY KEY       NOT NULL,
-  sentence_id       INT                     NOT NULL,
-  word       TEXT                     NOT NULL,
-  updated_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now_utc(),
-  created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now_utc(),
+  id                   SERIAL PRIMARY KEY       NOT NULL,
+  sentence_id          INT                      NOT NULL,
+  word                 TEXT                     NOT NULL,
+  word_length          INT                      NOT NULL,
+  syllables            INT                      NOT NULL,
+  updated_at           TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now_utc(),
+  created_at           TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now_utc(),
   CHECK (EXTRACT(TIMEZONE FROM updated_at) = '0'),
   CHECK (EXTRACT(TIMEZONE FROM created_at) = '0')
 );

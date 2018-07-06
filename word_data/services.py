@@ -1,7 +1,9 @@
 import re
+import math
 from pyphen import Pyphen
+from sqlalchemy import update
 from word_data.database import db_session
-from word_data.models import Dialogue, Paragraph, Sentence, Words
+from word_data.models import Dialogue, Paragraph, Sentence, Words, ParagraphTemplate
 
 
 class WordCount(object):
@@ -125,22 +127,24 @@ class ReadingScores(object):
         return db_services.get_sentence(paragraph_id=default_id)
 
     def get_total_words(self, session):
-        a = 0
-        for _row in session:
-            a = _row.sentence_length + a
-        return a
+        return session.sentence_length
+        # a = 0
+        # for _row in session:
+        #     a = _row.sentence_length + a
+        # return a
 
     def get_total_syllables(self, session):
         db_services = DatabaseServices()
-        a = 0
-        for _row in session:
-            total_syllables = db_services.get_syllable_total(session=session)
-            a = total_syllables + a
-        return a
+        return db_services.get_syllable_total(session=session)
+        # a = 0
+        # for _row in session:
+        #     total_syllables = db_services.get_syllable_total(session=session)
+        #     a = total_syllables + a
+        # return a
 
     def average_sentence_len(self, session):
         total_words = self.get_total_words(session=session)
-        total_sentences = len(session)
+        total_sentences = 1
         return total_words/total_sentences
 
     def average_syllables_per_word(self, session):
@@ -158,10 +162,27 @@ class ReadingScores(object):
         aspw = self.average_syllables_per_word(session=session)
         return float(0.39 * avsl) + float(11.8 * aspw) - 15.59
 
-    def generate_sentence_scores(self):
-        session = self.get_session(default_id=1)
-        for entry in session:
-            pass
+    def generate_sentence_scores(self, paragraph_id=1):
+        db = db_session()
+        rows = db.query(Paragraph).count()
+        while paragraph_id <= rows:
+            para_template = ParagraphTemplate()
+            session = self.get_session(default_id=paragraph_id)
+            for entry in session:
+                fre = math.floor(self.flesch_reading_ease(session=entry)*100)/100
+                fkg = math.floor(self.flesch_kincaid_grade(session=entry)*100)/100
+                db.query(Sentence).filter(Sentence.id == entry.id).update(values={'flesch_reading_ease': fre})
+                db.query(Sentence).filter(Sentence.id == entry.id).update(values={'flesch_kincaid_grade': fkg})
+                db.commit()
+
+                para_template.fre += fre
+                para_template.fkg += fkg
+            db.query(Paragraph).filter(Paragraph.id == paragraph_id).update(
+                values={'flesch_reading_ease': para_template.fre})
+            db.query(Paragraph).filter(Paragraph.id == paragraph_id).update(
+                values={'flesch_kincaid_grade': para_template.fkg})
+            db.commit()
+            paragraph_id += 1
 
 
 class DatabaseServices(object):

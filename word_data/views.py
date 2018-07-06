@@ -1,8 +1,9 @@
-from word_data.services import WordCount, DatabaseServices
+from word_data.services import WordCount, DatabaseServices, ReadingScores
 
 class Parse_File(object):
     wc = WordCount()
     dbs = DatabaseServices()
+    rs = ReadingScores()
 
     def run_parse(self, file):
         self.wc.parse_file(file=file)
@@ -11,10 +12,13 @@ class Parse_File(object):
         self.dbs.get_sentence(paragraph_id=3)
         # self.dbs.get_syllable_total(sentence_id=3)
 
+    def run_scores(self):
+        self.rs.generate_sentence_scores(paragraph_id=3)
+
 
 if __name__ == '__main__':
     file = '/home/pibblefiasco/Development/word_count/HRPG.txt'
     # pf = Parse_File()
     # pf.run_parse(file=file)
     pf = Parse_File()
-    pf.run_query()
+    pf.run_scores()

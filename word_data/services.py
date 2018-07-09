@@ -128,29 +128,26 @@ class ReadingScores(object):
 
     def get_total_words(self, session):
         return session.sentence_length
-        # a = 0
-        # for _row in session:
-        #     a = _row.sentence_length + a
-        # return a
 
     def get_total_syllables(self, session):
         db_services = DatabaseServices()
         return db_services.get_syllable_total(session=session)
-        # a = 0
-        # for _row in session:
-        #     total_syllables = db_services.get_syllable_total(session=session)
-        #     a = total_syllables + a
-        # return a
 
     def average_sentence_len(self, session):
         total_words = self.get_total_words(session=session)
         total_sentences = 1
-        return total_words/total_sentences
+        if total_words == 0:
+            return 0
+        else:
+            return total_words/total_sentences
 
     def average_syllables_per_word(self, session):
         total_syllables = self.get_total_syllables(session=session)
         total_words = self.get_total_words(session=session)
-        return total_syllables/total_words
+        if total_words == 0:
+            return 0
+        else:
+            return total_syllables/total_words
 
     def flesch_reading_ease(self, session):
         avsl = self.average_sentence_len(session=session)
@@ -164,57 +161,62 @@ class ReadingScores(object):
 
     def generate_sentence_scores(self, paragraph_id=1):
         db = db_session()
+        dbs = DatabaseServices()
         rows = db.query(Paragraph).count()
+
         while paragraph_id <= rows:
             para_template = ParagraphTemplate()
             session = self.get_session(default_id=paragraph_id)
+
             for entry in session:
                 fre = math.floor(self.flesch_reading_ease(session=entry)*100)/100
                 fkg = math.floor(self.flesch_kincaid_grade(session=entry)*100)/100
+
                 db.query(Sentence).filter(Sentence.id == entry.id).update(values={'flesch_reading_ease': fre})
                 db.query(Sentence).filter(Sentence.id == entry.id).update(values={'flesch_kincaid_grade': fkg})
                 db.commit()
 
                 para_template.fre += fre
                 para_template.fkg += fkg
+
+            paragraph_len_by_sent = dbs.get_paragraph_length_by_sentence(paragraph_id=paragraph_id)
+            paragraph_fre = para_template.fre / paragraph_len_by_sent
+            paragraph_fkg = para_template.fkg / paragraph_len_by_sent
+
             db.query(Paragraph).filter(Paragraph.id == paragraph_id).update(
-                values={'flesch_reading_ease': para_template.fre})
+                values={'flesch_reading_ease': paragraph_fre})
             db.query(Paragraph).filter(Paragraph.id == paragraph_id).update(
-                values={'flesch_kincaid_grade': para_template.fkg})
+                values={'flesch_kincaid_grade': paragraph_fkg})
             db.commit()
             paragraph_id += 1
 
 
 class DatabaseServices(object):
 
-    def __init__(self):
-        self.db = db_session()
+    # def __init__(self):
+    #     self.db = db_session()
 
     def get_id(self, tab, col, string):
-        row = self.db.query(tab).filter(col == string).first()
+        db = db_session()
+        row = db.query(tab).filter(col == string).first()
         return row.id
 
     def get_sentence(self, paragraph_id):
-        sess = self.db.query(Sentence).filter(Sentence.paragraph_id == paragraph_id).all()
-        return sess
+        db = db_session()
+        return db.query(Sentence).filter(Sentence.paragraph_id == paragraph_id).all()
 
     def get_syllable_total(self, session):
         a = 0
-        sess = self.db.query(Words).filter(Words.sentence_id == session.id).all()
+        db = db_session()
+        sess = db.query(Words).filter(Words.sentence_id == session.id).all()
         for _row in sess:
             a = _row.syllables + a
         return a
 
-    """
-    Populates empty columns
-    """
-
-    def paragraph_length_by_sentence(self):
-        # establish db connection
-        # loop or kwarg to fill paragraph.paragraph_length_by_sentence using
-        # SQL:
-        # select paragraph_id, count(sentence) from sentence group by sentence.paragraph_id
-        pass
+    def get_paragraph_length_by_sentence(self, paragraph_id):
+        db = db_session()
+        sess = db.query(Paragraph).filter(Paragraph.id == paragraph_id).first()
+        return sess.paragraph_length_by_sentence
 
     def paragraph_length_by_word(self):
         # establish db connection

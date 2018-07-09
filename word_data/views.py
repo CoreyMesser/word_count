@@ -1,4 +1,10 @@
+import logging
 from word_data.services import WordCount, DatabaseServices, ReadingScores
+
+logging.basicConfig()
+logging.getLogger('sqlalchemy.pool').setLevel(logging.INFO)
+handler = logging.FileHandler('/home/pibblefiasco/Development/word_count/word_data/logs/pool_logs.log')
+handler.setLevel(logging.INFO)
 
 class Parse_File(object):
     wc = WordCount()

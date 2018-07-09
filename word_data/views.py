@@ -11,20 +11,25 @@ class Parse_File(object):
     dbs = DatabaseServices()
     rs = ReadingScores()
 
+    def run(self, file):
+        self.run_parse(file=file)
+        print('Successfully Parsed File')
+        print('Calculating Scores...')
+        self.run_scores()
+        print('Successfully Calculated Scores')
+
     def run_parse(self, file):
         self.wc.parse_file(file=file)
 
-    def run_query(self):
-        self.dbs.get_sentence(paragraph_id=3)
-        # self.dbs.get_syllable_total(sentence_id=3)
-
     def run_scores(self):
-        self.rs.generate_sentence_scores(paragraph_id=3)
+        self.rs.generate_sentence_scores(paragraph_id=1)
 
 
 if __name__ == '__main__':
     file = '/home/pibblefiasco/Development/word_count/HRPG.txt'
+    pf = Parse_File()
+    pf.run(file=file)
     # pf = Parse_File()
     # pf.run_parse(file=file)
-    pf = Parse_File()
-    pf.run_scores()
+    # pf = Parse_File()
+    # pf.run_scores()

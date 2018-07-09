@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d29e4965-1bd0-469b-8047-79870de7fa69" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word_data/database.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_data/database.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/993ce62b-e685-44eb-b9a4-99559ca8977c.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/993ce62b-e685-44eb-b9a4-99559ca8977c.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/993ce62b-e685-44eb-b9a4-99559ca8977c/storage_v2/_src_/database/word_count.movIaw/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/993ce62b-e685-44eb-b9a4-99559ca8977c/storage_v2/_src_/database/word_count.movIaw/schema/public.abK9xQ.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/word_data/services.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_data/services.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/word_data/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/word_data/views.py" afterDir="false" />
     </list>
@@ -15,7 +15,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/word_count$word_count.coverage" NAME="word_count Coverage Results" MODIFIED="1531114149482" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/word_data" />
+    <SUITE FILE_PATH="coverage/word_count$word_count.coverage" NAME="word_count Coverage Results" MODIFIED="1531114848636" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/word_data" />
     <SUITE FILE_PATH="coverage/word_count$dataframe.coverage" NAME="dataframe Coverage Results" MODIFIED="1530591527956" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/word_data" />
   </component>
   <component name="CreatePatchCommitExecutor">
@@ -85,8 +85,8 @@
       <file leaf-file-name="services.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/word_data/services.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
-              <caret line="205" column="25" lean-forward="true" selection-start-line="205" selection-start-column="25" selection-end-line="205" selection-end-column="25" />
+            <state relative-caret-position="345">
+              <caret line="201" selection-start-line="201" selection-end-line="201" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -94,7 +94,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="database.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="database.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/word_data/database.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="270">
@@ -118,7 +118,7 @@
       <file leaf-file-name="data_frames.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/word_data/data_frames.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="600">
+            <state relative-caret-position="513">
               <caret line="44" selection-start-line="44" selection-end-line="44" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
@@ -142,11 +142,29 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/word_data/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="7" selection-start-line="7" selection-end-line="7" />
+            <state relative-caret-position="240">
+              <caret line="16" column="36" selection-start-line="16" selection-start-column="36" selection-end-line="16" selection-end-column="36" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="paragraph" pinned="false" current-in-tab="true">
+        <entry file="das://993ce62b-e685-44eb-b9a4-99559ca8977c/database/word_count/schema/public/table/paragraph">
+          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+            <state>
+              <filtering enabled="true" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="sentence" pinned="false" current-in-tab="false">
+        <entry file="das://993ce62b-e685-44eb-b9a4-99559ca8977c/database/word_count/schema/public/table/sentence">
+          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+            <state>
+              <filtering enabled="true" />
             </state>
           </provider>
         </entry>
@@ -189,9 +207,9 @@
         <option value="$PROJECT_DIR$/word_data/data_frames.py" />
         <option value="$PROJECT_DIR$/word_data/_database/01_create_tables" />
         <option value="$PROJECT_DIR$/word_data/models.py" />
-        <option value="$PROJECT_DIR$/word_data/views.py" />
-        <option value="$PROJECT_DIR$/word_data/services.py" />
         <option value="$PROJECT_DIR$/word_data/database.py" />
+        <option value="$PROJECT_DIR$/word_data/services.py" />
+        <option value="$PROJECT_DIR$/word_data/views.py" />
       </list>
     </option>
   </component>
@@ -235,7 +253,7 @@
               <item name="word_count" type="b2602c69:ProjectViewProjectNode" />
               <item name="word_count" type="462c0819:PsiDirectoryNode" />
               <item name="word_data" type="462c0819:PsiDirectoryNode" />
-              <item name="logs" type="462c0819:PsiDirectoryNode" />
+              <item name="_database" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -248,7 +266,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="add_unversioned_files" value="true" />
     <property name="com.intellij.database.dataSource.DataSourceTemplate" value="PostgreSQL&#10;Sqlite (Xerial)" />
-    <property name="database.console.LAST_STATE" value="false" />
+    <property name="database.console.LAST_STATE" value="true" />
     <property name="js.eslint.eslintPackage" value="" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/word_data/csv" />
     <property name="settings.editor.selected.configurable" value="database.main" />
@@ -381,21 +399,23 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="25" width="2560" height="1055" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" weight="0.329718" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
-      <window_info anchor="right" x="0" y="0" width="590" height="855" id="Documentation" order="5" sideWeight="0.3529412" side_tool="true" visible="true" weight="0.23508354" />
+      <window_info anchor="right" x="0" y="0" width="590" height="855" id="Documentation" order="5" sideWeight="0.3530499" side_tool="true" visible="true" weight="0.23508354" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49960223" weight="0.25921908" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49960223" weight="0.25813448" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.329718" />
       <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.5831345" weight="0.22125813" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.2451193" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.7327731" visible="true" weight="0.14240254" />
+      <window_info active="true" anchor="bottom" id="Database Console" order="13" visible="true" weight="0.41323212" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.7338262" visible="true" weight="0.14240254" />
       <window_info anchor="bottom" id="Docker" order="12" show_stripe_button="false" />
-      <window_info anchor="right" id="Database" order="3" sideWeight="0.64705884" visible="true" weight="0.23508354" />
+      <window_info anchor="right" id="Database" order="3" sideWeight="0.64695007" visible="true" weight="0.23508354" />
       <window_info anchor="right" id="SciView" order="4" />
-      <window_info id="Structure" order="2" sideWeight="0.2672269" side_tool="true" visible="true" weight="0.14240254" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49960223" visible="true" weight="0.3546638" />
+      <window_info id="Structure" order="2" sideWeight="0.26617375" side_tool="true" visible="true" weight="0.14240254" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49960223" weight="0.3546638" />
       <window_info id="Favorites" order="1" side_tool="true" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -403,7 +423,6 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Database Console" order="13" weight="0.41323212" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.329718" />
     </layout>
     <layout-to-restore>
@@ -624,16 +643,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/word_data/data_frames.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="600">
-          <caret line="44" selection-start-line="44" selection-end-line="44" />
-          <folding>
-            <element signature="e#0#19#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/.local/lib/python3.6/site-packages/sqlalchemy/engine/default.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="7485">
@@ -658,19 +667,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/word_data/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="7" selection-start-line="7" selection-end-line="7" />
-          <folding>
-            <element signature="e#0#14#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/word_data/logs/pool_logs.log">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$USER_HOME$/.local/lib/python3.6/site-packages/sqlalchemy/pool.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="212">
@@ -682,16 +678,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="777">
           <caret line="57" column="74" selection-start-line="57" selection-start-column="74" selection-end-line="57" selection-end-column="74" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/word_data/services.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="205" column="25" lean-forward="true" selection-start-line="205" selection-start-column="25" selection-end-line="205" selection-end-column="25" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -709,6 +695,50 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/word_data/logs/pool_logs.log">
+      <provider selected="true" editor-type-id="LogFileEditorProvider" />
+      <provider editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/word_data/database.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" column="38" selection-start-line="18" selection-start-column="38" selection-end-line="18" selection-end-column="38" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/word_data/data_frames.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="513">
+          <caret line="44" selection-start-line="44" selection-end-line="44" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/word_data/services.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="201" selection-start-line="201" selection-end-line="201" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/word_data/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="36" selection-start-line="16" selection-start-column="36" selection-end-line="16" selection-end-column="36" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="das://993ce62b-e685-44eb-b9a4-99559ca8977c/database/word_count/schema/public/table/sentence">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
@@ -720,16 +750,6 @@
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
           <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/word_data/database.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="38" selection-start-line="18" selection-start-column="38" selection-end-line="18" selection-end-column="38" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>

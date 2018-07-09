@@ -199,7 +199,6 @@ class DatabaseServices(object):
     def get_id(self, tab, col, string):
         db = db_session()
         row = db.query(tab).filter(col == string).first()
-        db.dispose()
         return row.id
 
     def get_sentence(self, paragraph_id):

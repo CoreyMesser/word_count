@@ -43,7 +43,7 @@ class WordCount(object):
         db = db_session()
         rs = re.split(r'[.?!]', chunk)
         for line in rs:
-            if line == '\n':
+            if line == '\n' or line == ' \n':
                 continue
             else:
                 sl = Sentence()
@@ -103,13 +103,14 @@ class WordCount(object):
 
     def thing_counter(self, chunk):
         """len of a thing"""
-        return len(chunk.split(' '))
+        thing = len(chunk.lstrip().split(' '))
+        return thing
 
     def paragraph_cleaner(self, chunk):
         """cleans out stupid \n so I can get on with my life and not waste an hour trying to do it with one line"""
         c_split = re.split(r'[.?!]', chunk)
         for n in c_split:
-            if n == '\n':
+            if n == '\n' or n == ' \n':
                 c_split.pop(c_split.index(n))
         return c_split
 

@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
 
 from word_data.database import engine as en
 from word_data.constants import SystemConstants
@@ -39,9 +40,36 @@ class Reports(object):
         # calculate sentence len
         # add up word total for sentence / by sentence len
 
+    def fre_graph_paragraph(self):
+        y = pd.read_sql_query('SELECT flesch_reading_ease FROM paragraph order by paragraph.id asc ', en)
+        x = pd.read_sql_query('SELECT id FROM paragraph order by paragraph.id asc', en)
+        plt.plot(x, y)
+        plt.xlabel('ID')
+        plt.ylabel('Flesch Reading Ease')
+        plt.title('Flesch Reading Ease Score')
+
+        plt.show()
+
+    def fre_graph_sentence(self):
+        y = pd.read_sql_query('SELECT flesch_reading_ease FROM sentence order by sentence.id asc ', en)
+        x = pd.read_sql_query('SELECT id FROM sentence order by sentence.id asc', en)
+        u = pd.read_sql_query('SELECT flesch_kincaid_grade FROM sentence order by sentence.id asc ', en)
+        v = pd.read_sql_query('SELECT id FROM sentence order by sentence.id asc', en)
+        fig = plt.figure()
+        axes = fig.add_axes([0.1,0.1,0.8,0.8])
+
+        axes.plot(x, y, 'b')
+        axes.plot(x, u, 'r')
+        axes.set_xlabel('ID')
+        axes.set_ylabel('Flesch Reading Ease')
+        axes.set_title('Flesch Reading Ease Score')
+
+        plt.show()
+
+
 if __name__ == '__main__':
     rep = Reports()
-    rep.word_length()
+    rep.fre_graph_sentence()
 
 # sentence length
 # average sentence length

@@ -16,10 +16,7 @@ CREATE TABLE paragraph
   paragraph_length_by_word     INT                      NULL,
   flesch_reading_ease          INT                      NULL,
   flesch_kincaid_grade         INT                      NULL,
-  updated_at                   TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now_utc(),
-  created_at                   TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now_utc(),
-  CHECK (EXTRACT(TIMEZONE FROM updated_at) = '0'),
-  CHECK (EXTRACT(TIMEZONE FROM created_at) = '0')
+  created_at                   TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now_utc()
 );
 
 CREATE TABLE sentence
@@ -30,10 +27,7 @@ CREATE TABLE sentence
   sentence_length      INT                      NOT NULL,
   flesch_reading_ease  INT                      NULL,
   flesch_kincaid_grade INT                      NULL,
-  updated_at           TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now_utc(),
   created_at           TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now_utc(),
-  CHECK (EXTRACT(TIMEZONE FROM updated_at) = '0'),
-  CHECK (EXTRACT(TIMEZONE FROM created_at) = '0'),
 
   FOREIGN KEY (paragraph_id) REFERENCES paragraph (id)
 );
@@ -47,10 +41,7 @@ CREATE TABLE dialogue
   flesch_reading_ease  INT                      NULL,
   flesch_kincaid_grade INT                      NULL,
   sentence_ids         INT                      NOT NULL,
-  updated_at           TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now_utc(),
   created_at           TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now_utc(),
-  CHECK (EXTRACT(TIMEZONE FROM updated_at) = '0'),
-  CHECK (EXTRACT(TIMEZONE FROM created_at) = '0'),
 
   FOREIGN KEY (paragraph_id) REFERENCES paragraph (id),
   FOREIGN KEY (sentence_ids) REFERENCES sentence (id)
@@ -64,8 +55,5 @@ CREATE TABLE words
   word                 TEXT                     NOT NULL,
   word_length          INT                      NOT NULL,
   syllables            INT                      NOT NULL,
-  updated_at           TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now_utc(),
-  created_at           TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now_utc(),
-  CHECK (EXTRACT(TIMEZONE FROM updated_at) = '0'),
-  CHECK (EXTRACT(TIMEZONE FROM created_at) = '0')
+  created_at           TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now_utc()
 );

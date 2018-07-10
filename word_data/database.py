@@ -1,7 +1,10 @@
 import os
+import logging
+
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.pool import NullPool
 
 Base = declarative_base()
 def get_uri():
@@ -13,5 +16,5 @@ def get_uri():
     )
 
 
-engine = create_engine(get_uri())
+engine = create_engine(get_uri(), poolclass=NullPool)
 db_session = sessionmaker(bind=engine)

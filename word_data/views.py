@@ -12,6 +12,7 @@ class Parse_File(object):
     rs = ReadingScores()
 
     def run(self, file):
+        print('Parsing File...')
         self.run_parse(file=file)
         print('Successfully Parsed File')
         print('Calculating Scores...')

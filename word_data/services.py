@@ -41,7 +41,7 @@ class WordCount(object):
         :return:
         """
         db = db_session()
-        rs = re.split(r'\W+', chunk)
+        rs = re.split(r'[.?!]', chunk)
         for line in rs:
             if line == '\n' or line == ' \n':
                 continue

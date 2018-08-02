@@ -19,6 +19,7 @@ class WordCount(object):
         """
         with open(file=file, encoding='utf=8') as raw_file:
             db = db_session()
+            chunk_id, sent_id = 1, 1
             for chunk in raw_file:
                 if len(chunk) > 1:
                     pc = Paragraph()
@@ -27,33 +28,36 @@ class WordCount(object):
                     pc.paragraph_length_by_word = self.thing_counter(chunk=chunk)
                     db.add(pc)
                     db.commit()
-                    paragraph_id = self.db_service.get_id(tab=Paragraph, col=Paragraph.paragraph, string=chunk)
-                    self.parse_sentence(chunk=chunk, paragraph_id=paragraph_id)
+                    sent_id = self.parse_sentence(chunk=chunk, paragraph_id=chunk_id, sentence_id=sent_id)
+                    chunk_id += 1
 
     def parse_file(self, file):
         self.open_file(file=file)
 
-    def parse_sentence(self, chunk, paragraph_id):
+    def parse_sentence(self, chunk, paragraph_id, sentence_id):
         """
         Takes a paragraph chunk and splits it up into sentences by punctuation
         :param chunk:
         :param paragraph_id:
+        :param sentence_id:
         :return:
         """
         db = db_session()
-        rs = re.split(r'[.?!"]', chunk)
+        rs = re.split(r'[.?!"“”]', chunk)
         for line in rs:
-            if line == '\n' or line == ' \n':
+            line = line.lstrip()
+            if line == '\n' or line == ' \n' or line == '"' or line == '“' or line == '”' or line == ' ' or len(line) < 1:
                 continue
             else:
                 sl = Sentence()
                 sl.sentence = line.lstrip()
                 sl.paragraph_id = paragraph_id
-                sl.sentence_length = self.thing_counter(chunk=line)
+                sl.sentence_length = self.thing_counter(chunk=line.lstrip())
                 db.add(sl)
-                db.commit()
-                sentence_id = self.db_service.get_id(tab=Sentence, col=Sentence.sentence, string=line.lstrip())
                 self.parse_word(line=line.lstrip(), sentence_id=sentence_id)
+                db.commit()
+                sentence_id += 1
+        return sentence_id
 
     def parse_word(self, line, sentence_id):
         """
@@ -73,8 +77,6 @@ class WordCount(object):
             sw.sentence_id = sentence_id
             db.add(sw)
         db.commit()
-        # query db for sentence lines
-        # break apart words
 
     def dialogue_parser(self, chunk, paragraph_id):
         db = db_session()

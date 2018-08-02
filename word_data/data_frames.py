@@ -70,7 +70,7 @@ class Reports(object):
         plt.show()
 
     def seaborn_jointplot_fre(self):
-        sentence = pd.read_sql_query('SELECT * FROM sentence', en)
+        sentence = pd.read_sql_query('SELECT * FROM paragraph', en)
         # x = pd.read_sql_query('SELECT id FROM sentence order by sentence.id asc', en)
         sns.jointplot(x='flesch_kincaid_grade', y='flesch_reading_ease', data=sentence, kind='hex', stat_func=kendalltau, color="#4CB391")
         plt.show()

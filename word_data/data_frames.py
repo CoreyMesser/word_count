@@ -1,5 +1,8 @@
 import pandas as pd
-import numpy as np
+import matplotlib.pyplot as plt
+from scipy.stats import kendalltau
+import seaborn as sns
+sns.set_style(style='ticks')
 
 from word_data.database import engine as en
 from word_data.constants import SystemConstants
@@ -39,9 +42,43 @@ class Reports(object):
         # calculate sentence len
         # add up word total for sentence / by sentence len
 
+    def fre_graph_paragraph(self):
+        y = pd.read_sql_query('SELECT flesch_reading_ease FROM paragraph order by paragraph.id asc ', en)
+        x = pd.read_sql_query('SELECT id FROM paragraph order by paragraph.id asc', en)
+        plt.plot(x, y)
+        plt.xlabel('ID')
+        plt.ylabel('Flesch Reading Ease')
+        plt.title('Flesch Reading Ease Score')
+
+        plt.show()
+
+    def fre_graph_sentence(self):
+        y = pd.read_sql_query('SELECT flesch_reading_ease FROM sentence order by sentence.id asc ', en)
+        x = pd.read_sql_query('SELECT id FROM sentence order by sentence.id asc', en)
+        u = pd.read_sql_query('SELECT flesch_kincaid_grade FROM sentence order by sentence.id asc ', en)
+        v = pd.read_sql_query('SELECT id FROM sentence order by sentence.id asc', en)
+        fig = plt.figure()
+        axes = fig.add_axes([0.1,0.1,0.8,0.8])
+
+        axes.plot(x, y, 'b', label="FRE")
+        axes.plot(x, u, 'r', label="FKG")
+        axes.set_xlabel('ID')
+        axes.set_ylabel('Flesch Reading Ease')
+        axes.set_title('Flesch Reading Ease Score')
+        axes.legend()
+
+        plt.show()
+
+    def seaborn_jointplot_fre(self):
+        sentence = pd.read_sql_query('SELECT * FROM sentence', en)
+        # x = pd.read_sql_query('SELECT id FROM sentence order by sentence.id asc', en)
+        sns.jointplot(x='flesch_kincaid_grade', y='flesch_reading_ease', data=sentence, kind='hex', stat_func=kendalltau, color="#4CB391")
+        plt.show()
+
+
 if __name__ == '__main__':
     rep = Reports()
-    rep.word_length()
+    rep.seaborn_jointplot_fre()
 
 # sentence length
 # average sentence length

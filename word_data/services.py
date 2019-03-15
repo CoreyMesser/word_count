@@ -68,14 +68,30 @@ class WordCount(object):
         """
         db = db_session()
         ws = line.split(' ')
+
+        tot_syll = 0
+        rhythm_by_syll = []
+        rhythm_by_word = []
+
         for word in ws:
             word = self.comma_stripper(strip=word)
             sw = Words()
             sw.word = word
-            sw.word_length = len(word)
-            sw.syllables = self.syllable_counter(word=word)
+            word_len = len(word)
+            sw.word_length = word_len
+            rhythm_by_word.append(word_len)
+            syllables = self.syllable_counter(word=word)
+            sw.syllables = syllables
+            rhythm_by_syll.append(syllables)
             sw.sentence_id = sentence_id
             db.add(sw)
+            
+        tot_syll = sum(rhythm_by_syll)
+        sl = Sentence()
+        sl.total_syllables = tot_syll
+        sl.rhythm_by_syllable = rhythm_by_syll
+        sl.rhythm_by_word_len = rhythm_by_word
+        db.add(sl)
         db.commit()
 
     def comma_stripper(self, strip):

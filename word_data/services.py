@@ -68,26 +68,31 @@ class WordCount(object):
         """
         db = db_session()
         ws = line.split(' ')
+
+        tot_syll = 0
+        rhythm_by_syll = []
+        rhythm_by_word = []
+
         for word in ws:
             word = self.comma_stripper(strip=word)
             sw = Words()
             sw.word = word
-            sw.word_length = len(word)
-            sw.syllables = self.syllable_counter(word=word)
+            word_len = len(word)
+            sw.word_length = word_len
+            rhythm_by_word.append(word_len)
+            syllables = self.syllable_counter(word=word)
+            sw.syllables = syllables
+            rhythm_by_syll.append(syllables)
             sw.sentence_id = sentence_id
             db.add(sw)
+
+        # tot_syll = sum(rhythm_by_syll)
+        # sl = Sentence()
+        # sl.total_syllables = tot_syll
+        # sl.rhythm_by_syllable = rhythm_by_syll
+        # sl.rhythm_by_word_len = rhythm_by_word
+        # db.add(sl)
         db.commit()
-
-    def dialogue_parser(self, chunk, paragraph_id):
-        db = db_session()
-        diag = re.search(r'\"', chunk).group()
-
-        pass
-
-    def white_space_stripper(self, strip):
-        """General purpose white space stripper"""
-        for string in strip:
-            return string.lstrip()
 
     def comma_stripper(self, strip):
         """Strips commas from individual words"""
@@ -98,7 +103,8 @@ class WordCount(object):
             return strip
 
     def syllable_counter(self, word, lang='en_US'):
-        """uses the Pyphen library to hyphenate the word and then count the hyphens +1 to simulate syllables in english"""
+        """uses the Pyphen library to hyphenate the word and then
+        count the hyphens +1 to simulate syllables in english"""
         dic = Pyphen(lang=lang)
         hyphenated = dic.inserted(word=word)
         return hyphenated.count('-')+1
@@ -118,12 +124,6 @@ class WordCount(object):
 
 
 class ReadingScores(object):
-
-    # get sentence
-    # parse sentence properties (sentence model)
-    # this will give us access to a sentence id and paragraph id
-    # we can use the ids to generate fks for paragraphs and sentences
-    # we can pull words by sentence id
 
     def get_session(self, default_id):
         db_services = DatabaseServices()
@@ -196,9 +196,6 @@ class ReadingScores(object):
 
 class DatabaseServices(object):
 
-    # def __init__(self):
-    #     self.db = db_session()
-
     def get_id(self, tab, col, string):
         db = db_session()
         row = db.query(tab).filter(col == string).first()
@@ -220,13 +217,3 @@ class DatabaseServices(object):
         db = db_session()
         sess = db.query(Paragraph).filter(Paragraph.id == paragraph_id).first()
         return sess.paragraph_length_by_sentence
-
-    def paragraph_length_by_word(self):
-        # establish db connection
-        # loop or kwarg to fill paragraph.paragraph_length_by_sentence using
-        # SQL:
-        # select paragraph.id as p_id, count(word) as w_count from words
-        # join sentence on sentence.id = sentence_id
-        # join paragraph on paragraph.id = sentence.paragraph_id
-        # group by paragraph.id order by paragraph.id asc
-        pass

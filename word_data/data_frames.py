@@ -28,7 +28,8 @@ class Reports(object):
         self.create_data_frame(query=words)
 
     def sentence_length(self):
-        sentence = pd.read_sql_query('select sentence.id, count(words.sentence_id), sentence from words join sentence on sentence.id = sentence_id group by sentence.id order by sentence.id asc', en)
+        sentence = pd.read_sql_query('select sentence.id, count(words.sentence_id), sentence from words join sentence '
+                                     'on sentence.id = sentence_id group by sentence.id order by sentence.id asc', en)
         # sentence_words = pd.read_sql_query('SELECT LENGTH(sentence), sentence FROM sentence INNER JOIN words on words.id = sentence.id', en)
         self.create_data_frame(query=sentence)
 

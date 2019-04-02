@@ -5,6 +5,10 @@ from sqlalchemy import update
 from word_data.database import db_session
 from word_data.models import Dialogue, Paragraph, Sentence, Words, ParagraphTemplate
 
+class Session(object):
+    def startSession(self):
+        session = []
+        return session
 
 class WordCount(object):
 

@@ -3,17 +3,19 @@ import math
 from pyphen import Pyphen
 from sqlalchemy import update
 from word_data.database import db_session
-from word_data.models import Dialogue, Paragraph, Sentence, Words, ParagraphTemplate
+from word_data.models import Dialogue, Paragraph, Sentence, Words, ParagraphTemplate, ParagraphDbModel, WordsDbModel, SentenceDbModel
 
 class Session(object):
-    def startSession(self):
-        session = []
-        return session
+    def __init__(self):
+        self.pdbm = ParagraphDbModel()
+        self.sdbm = SentenceDbModel()
+        self.wdbm = WordsDbModel()
 
 class WordCount(object):
 
     def __init__(self):
         self.db_service = DatabaseServices()
+        self.session = Session()
 
     def open_file(self, file):
         """
@@ -21,24 +23,33 @@ class WordCount(object):
         :param file:
         :return:
         """
+        session = self.session
+
         with open(file=file, encoding='utf=8') as raw_file:
-            db = db_session()
+            # db = db_session()
             chunk_id, sent_id = 1, 1
             for chunk in raw_file:
                 if len(chunk) > 1:
-                    pc = Paragraph()
-                    pc.paragraph = chunk
-                    pc.paragraph_length_by_sentence = len(self.paragraph_cleaner(chunk=chunk))
-                    pc.paragraph_length_by_word = self.thing_counter(chunk=chunk)
-                    db.add(pc)
-                    db.commit()
-                    sent_id = self.parse_sentence(chunk=chunk, paragraph_id=chunk_id, sentence_id=sent_id)
+                    session.pdbm.paragraph = chunk
+                    session.pdbm.paragraph_length_by_sentence = len(self.paragraph_cleaner(chunk=chunk))
+                    session.pdbm.paragraph_length_by_word = self.thing_counter(chunk=chunk)
+                    sent_id = self.parse_sentence(chunk=chunk, paragraph_id=chunk_id, sentence_id=sent_id, session=session)
+                    self.db_service.commit_session(session=session)
                     chunk_id += 1
+
+                    # pc = Paragraph()
+                    # pc.paragraph = chunk
+                    # pc.paragraph_length_by_sentence = len(self.paragraph_cleaner(chunk=chunk))
+                    # pc.paragraph_length_by_word = self.thing_counter(chunk=chunk)
+                    # db.add(pc)
+                    # db.commit()
+                    # sent_id = self.parse_sentence(chunk=chunk, paragraph_id=chunk_id, sentence_id=sent_id)
+                    # chunk_id += 1
 
     def parse_file(self, file):
         self.open_file(file=file)
 
-    def parse_sentence(self, chunk, paragraph_id, sentence_id):
+    def parse_sentence(self, chunk, paragraph_id, sentence_id, session):
         """
         Takes a paragraph chunk and splits it up into sentences by punctuation
         :param chunk:
@@ -46,31 +57,37 @@ class WordCount(object):
         :param sentence_id:
         :return:
         """
-        db = db_session()
+        # db = db_session()
         rs = re.split(r'[.?!"“”]', chunk)
         for line in rs:
             line = line.lstrip()
             if line == '\n' or line == ' \n' or line == '"' or line == '“' or line == '”' or line == ' ' or len(line) < 1:
                 continue
             else:
-                sl = Sentence()
-                sl.sentence = line.lstrip()
-                sl.paragraph_id = paragraph_id
-                sl.sentence_length = self.thing_counter(chunk=line.lstrip())
-                db.add(sl)
-                self.parse_word(line=line.lstrip(), sentence_id=sentence_id)
-                db.commit()
+                session.sdbm.sentence = line.lstrip()
+                session.paragraph_id = paragraph_id
+                session.sentence_length = self.thing_counter(chunk=line.lstrip())
+                self.parse_word(line=line.lstrip(), sentence_id=sentence_id, session=session)
                 sentence_id += 1
+
+                # sl = Sentence()
+                # sl.sentence = line.lstrip()
+                # sl.paragraph_id = paragraph_id
+                # sl.sentence_length = self.thing_counter(chunk=line.lstrip())
+                # db.add(sl)
+                # self.parse_word(line=line.lstrip(), sentence_id=sentence_id)
+                # db.commit()
+                # sentence_id += 1
         return sentence_id
 
-    def parse_word(self, line, sentence_id):
+    def parse_word(self, line, sentence_id, session):
         """
         Takes a sentence line and splits it up into words by white space
         :param line:
         :param sentence_id:
         :return:
         """
-        db = db_session()
+        # db = db_session()
         ws = line.split(' ')
 
         tot_syll = 0
@@ -79,24 +96,36 @@ class WordCount(object):
 
         for word in ws:
             word = self.comma_stripper(strip=word)
-            sw = Words()
-            sw.word = word
+            session.word = word
             word_len = len(word)
-            sw.word_length = word_len
+            session.word_length = word_len
             rhythm_by_word.append(word_len)
             syllables = self.syllable_counter(word=word)
-            sw.syllables = syllables
+            session.syllables = syllables
             rhythm_by_syll.append(syllables)
-            sw.sentence_id = sentence_id
-            db.add(sw)
+            session.sentence_id = sentence_id
+
+            # sw = Words()
+            # sw.word = word
+            # word_len = len(word)
+            # sw.word_length = word_len
+            # rhythm_by_word.append(word_len)
+            # syllables = self.syllable_counter(word=word)
+            # sw.syllables = syllables
+            # rhythm_by_syll.append(syllables)
+            # sw.sentence_id = sentence_id
+            # db.add(sw)
             
         tot_syll = sum(rhythm_by_syll)
-        sl = Sentence()
-        sl.total_syllables = tot_syll
-        sl.rhythm_by_syllable = rhythm_by_syll
-        sl.rhythm_by_word_len = rhythm_by_word
-        db.add(sl)
-        db.commit()
+        session.total_syllables = tot_syll
+        session.rhythm_by_syllable = rhythm_by_syll
+        session.rhythm_by_word_len = rhythm_by_word
+        # sl = Sentence()
+        # sl.total_syllables = tot_syll
+        # sl.rhythm_by_syllable = rhythm_by_syll
+        # sl.rhythm_by_word_len = rhythm_by_word
+        # db.add(sl)
+        # db.commit()
 
     def comma_stripper(self, strip):
         """Strips commas from individual words"""
@@ -221,3 +250,30 @@ class DatabaseServices(object):
         db = db_session()
         sess = db.query(Paragraph).filter(Paragraph.id == paragraph_id).first()
         return sess.paragraph_length_by_sentence
+
+    def commit_session(self, session):
+        db = db_session()
+
+        pc = Paragraph()
+        pc.paragraph = session.pdbm.paragraph
+        pc.paragraph_length_by_sentence = session.pdbm.paragraph_length_by_sentence
+        pc.paragraph_length_by_word = session.pdbm.paragraph_length_by_word
+        db.add(pc)
+
+        sl = Sentence()
+        sl.sentence = session.sdbm.sentence
+        sl.paragraph_id = session.sdbm.paragraph_id
+        sl.sentence_length = session.sdbm.sentence_length
+        sl.total_syllables = session.sdbm.total_syllables
+        sl.rhythm_by_syllable = session.sdbm.rhythm_by_syllable
+        sl.rhythm_by_word_len = session.sdbm.rhythm_by_word_len
+        db.add(sl)
+
+        ws = Words()
+        ws.word = session.wdbm.word
+        ws.word_length = session.wdbm.word_len
+        ws.syllables = session.wdbm.syllables
+        ws.sentence_id = session.sdbm.sentence_id
+        db.add(ws)
+
+        db.commit()

@@ -62,9 +62,37 @@ class Dialogue(Base):
     sentence = relationship('Sentence')
 
 
-
 class ParagraphTemplate(object):
     def __init__(self):
         self.id = 0
         self.fre = 0
         self.fkg = 0
+
+
+class ParagraphDbModel(object):
+    def __init__(self):
+        self.paragraph = ''
+        self.paragraph_length_by_sentence = 0
+        self.paragraph_length_by_word = 0
+        self.flesch_reading_ease = 0
+        self.flesch_kincaid_grade = 0
+
+
+class WordsDbModel(object):
+    def __init__(self):
+        self.sentence_id = 0
+        self.word = ''
+        self.word_length = 0
+        self.syllables = 0
+
+
+class SentenceDbModel(object):
+    def __init__(self):
+        self.paragraph_id = 0
+        self.sentence = ''
+        self.sentence_length = 0
+        self.total_syllables = 0
+        self.rhythm_by_syllable = ''
+        self.rhythm_by_word_len = ''
+        self.flesch_reading_ease = 0
+        self.flesch_kincaid_grade = 0

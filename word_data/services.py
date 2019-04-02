@@ -5,6 +5,10 @@ from sqlalchemy import update
 from word_data.database import db_session
 from word_data.models import Dialogue, Paragraph, Sentence, Words, ParagraphTemplate
 
+class Session(object):
+    def startSession(self):
+        session = []
+        return session
 
 class WordCount(object):
 
@@ -85,13 +89,13 @@ class WordCount(object):
             rhythm_by_syll.append(syllables)
             sw.sentence_id = sentence_id
             db.add(sw)
-            
-        tot_syll = sum(rhythm_by_syll)
-        sl = Sentence()
-        sl.total_syllables = tot_syll
-        sl.rhythm_by_syllable = rhythm_by_syll
-        sl.rhythm_by_word_len = rhythm_by_word
-        db.add(sl)
+
+        # tot_syll = sum(rhythm_by_syll)
+        # sl = Sentence()
+        # sl.total_syllables = tot_syll
+        # sl.rhythm_by_syllable = rhythm_by_syll
+        # sl.rhythm_by_word_len = rhythm_by_word
+        # db.add(sl)
         db.commit()
 
     def comma_stripper(self, strip):

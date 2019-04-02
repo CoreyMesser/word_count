@@ -85,13 +85,13 @@ class WordCount(object):
             rhythm_by_syll.append(syllables)
             sw.sentence_id = sentence_id
             db.add(sw)
-            
-        tot_syll = sum(rhythm_by_syll)
-        sl = Sentence()
-        sl.total_syllables = tot_syll
-        sl.rhythm_by_syllable = rhythm_by_syll
-        sl.rhythm_by_word_len = rhythm_by_word
-        db.add(sl)
+
+        # tot_syll = sum(rhythm_by_syll)
+        # sl = Sentence()
+        # sl.total_syllables = tot_syll
+        # sl.rhythm_by_syllable = rhythm_by_syll
+        # sl.rhythm_by_word_len = rhythm_by_word
+        # db.add(sl)
         db.commit()
 
     def comma_stripper(self, strip):

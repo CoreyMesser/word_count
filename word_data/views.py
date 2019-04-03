@@ -1,10 +1,16 @@
 import logging
 from word_data.services import WordCount, DatabaseServices, ReadingScores
+from word_data.decorators import time_tracker
 
 logging.basicConfig()
 logging.getLogger('sqlalchemy.pool').setLevel(logging.INFO)
 handler = logging.FileHandler('/home/pibblefiasco/Development/word_count/word_data/logs/pool_logs.log')
 handler.setLevel(logging.INFO)
+
+
+def _log(message):
+    print('[SimpleTimeTracker] {function_name} {total_time:.3f}'.format(**message))
+
 
 class Parse_File(object):
     wc = WordCount()
@@ -19,9 +25,11 @@ class Parse_File(object):
         self.run_scores()
         print('Successfully Calculated Scores')
 
+    @time_tracker(_log)
     def run_parse(self, file):
         self.wc.parse_file(file=file)
 
+    @time_tracker(_log)
     def run_scores(self):
         self.rs.generate_sentence_scores(paragraph_id=1)
 

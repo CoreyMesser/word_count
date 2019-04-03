@@ -33,7 +33,7 @@ class Sentence(Base):
     __tablename__ = 'sentence'
 
     id = Column(Integer, primary_key=True, server_default=text("nextval('sentence_id_seq'::regclass)"))
-    paragraph_id = Column(ForeignKey('paragraph.id'), nullable=False)
+    paragraph_id = Column(ForeignKey('paragraph.id'))
     sentence = Column(Text, nullable=False)
     sentence_length = Column(Integer, nullable=False)
     total_syllables = Column(Integer)
@@ -69,30 +69,9 @@ class ParagraphTemplate(object):
         self.fre = 0
         self.fkg = 0
 
-class ParagraphDbModel(object):
-    def __init__(self):
-        self.id = 0
-        self.paragraph = ''
-        self.paragraph_length_by_sentence = 0
-        self.paragraph_length_by_word = 0
-        self.flesch_reading_ease = 0
-        self.flesch_kincaid_grade = 0
-
-class WordsDbModel(object):
-    def __init__(self):
+    def wdbm(self):
         self.id = 0
         self.sentence_id = 0
         self.word = ''
         self.word_length = 0
         self.syllables = 0
-
-class SentenceDbModel(object):
-    def __init__(self):
-        self.paragraph_id = 0
-        self.sentence = ''
-        self.sentence_length = 0
-        self.total_syllables = 0
-        self.rhythm_by_syllable = ''
-        self.rhythm_by_word_len = ''
-        self.flesch_reading_ease = 0
-        self.flesch_kincaid_grade = 0

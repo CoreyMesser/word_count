@@ -88,6 +88,7 @@ class WordsDbModel(object):
 
 class SentenceDbModel(object):
     def __init__(self):
+        self.sentence_id = 0
         self.paragraph_id = 0
         self.sentence = ''
         self.sentence_length = 0

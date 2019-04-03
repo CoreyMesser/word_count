@@ -94,6 +94,7 @@ class WordCount(object):
         rhythm_by_syll = []
         rhythm_by_word = []
 
+        # would need to build an extensive model and or dict to store all the word data and then unpack it for the final commit
         for word in ws:
             word = self.comma_stripper(strip=word)
             session.word = word
@@ -103,7 +104,7 @@ class WordCount(object):
             syllables = self.syllable_counter(word=word)
             session.syllables = syllables
             rhythm_by_syll.append(syllables)
-            session.sentence_id = sentence_id
+            session.sdbm.sentence_id = sentence_id
 
             # sw = Words()
             # sw.word = word
@@ -271,7 +272,7 @@ class DatabaseServices(object):
 
         ws = Words()
         ws.word = session.wdbm.word
-        ws.word_length = session.wdbm.word_len
+        ws.word_length = session.wdbm.word_length
         ws.syllables = session.wdbm.syllables
         ws.sentence_id = session.sdbm.sentence_id
         db.add(ws)

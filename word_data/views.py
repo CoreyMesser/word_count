@@ -36,7 +36,6 @@ class Parse_File(object):
 
 if __name__ == '__main__':
     file = '/home/pibblefiasco/Development/word_count/writing_samples/HRPG.txt'
-    # file = '/home/pibblefiasco/Development/word_count/writing_samples/SpiceofLife_Short.txt'
     pf = Parse_File()
     pf.run(file=file)
     # pf = Parse_File()

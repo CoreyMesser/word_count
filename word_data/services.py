@@ -100,19 +100,6 @@ class WordCount(object):
                               'word_length': word_len,
                               'syllables': syllables})
 
-            # sw = Words()
-            # sw.word = word
-            #
-            # word_len = len(word)
-            # sw.word_length = word_len
-            # rhythm_by_word.append(word_len)
-            #
-            # syllables = self.syllable_counter(word=word)
-            # sw.syllables = syllables
-            # rhythm_by_syll.append(syllables)
-            # sw.sentence_id = sentence_id
-            # db.add(sw)
-            # db.commit()
         db.bulk_insert_mappings(Words, word_dict)
         db.commit()
         return tot_syll, rhythm_by_syll, rhythm_by_word

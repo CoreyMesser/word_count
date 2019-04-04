@@ -14,13 +14,13 @@
       <ObjectId>16386</ObjectId>
       <StateNumber>557</StateNumber>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>116054</IntrospectionStateNumber>
+      <IntrospectionStateNumber>147664</IntrospectionStateNumber>
       <Current>1</Current>
       <Visible>1</Visible>
-      <Relations>sequence|table|19838|19840|1
-sequence|table|19850|19852|1
-sequence|table|19867|19869|1
-sequence|table|19889|19891|1
+      <Relations>sequence|table|20142|20144|1
+sequence|table|20154|20156|1
+sequence|table|20171|20173|1
+sequence|table|20193|20195|1
 </Relations>
     </database>
     <role id="4" parent="1" name="pg_monitor">
@@ -110,7 +110,7 @@ sequence|table|19889|19891|1
       <StateNumber>351</StateNumber>
       <Owner>postgres</Owner>
       <IntrospectionTimestamp>2018-08-01.23:47:58.371</IntrospectionTimestamp>
-      <IntrospectionStateNumber>116055</IntrospectionStateNumber>
+      <IntrospectionStateNumber>147665</IntrospectionStateNumber>
       <Current>1</Current>
       <Visible>1</Visible>
     </schema>
@@ -165,62 +165,62 @@ sequence|table|19889|19891|1
       <SchemaId>11</SchemaId>
     </extension>
     <sequence id="25" parent="17" name="dialogue_id_seq">
-      <ObjectId>19867</ObjectId>
-      <StateNumber>116052</StateNumber>
+      <ObjectId>20171</ObjectId>
+      <StateNumber>147662</StateNumber>
       <Owner>postgres</Owner>
       <SequenceIdentity>1..2147483647</SequenceIdentity>
       <CacheSize>1</CacheSize>
       <DataType>integer</DataType>
     </sequence>
     <sequence id="26" parent="17" name="paragraph_id_seq">
-      <ObjectId>19838</ObjectId>
-      <StateNumber>116050</StateNumber>
+      <ObjectId>20142</ObjectId>
+      <StateNumber>147660</StateNumber>
       <Owner>postgres</Owner>
       <SequenceIdentity>1..2147483647</SequenceIdentity>
       <CacheSize>1</CacheSize>
       <DataType>integer</DataType>
     </sequence>
     <sequence id="27" parent="17" name="sentence_id_seq">
-      <ObjectId>19850</ObjectId>
-      <StateNumber>116051</StateNumber>
+      <ObjectId>20154</ObjectId>
+      <StateNumber>147661</StateNumber>
       <Owner>postgres</Owner>
       <SequenceIdentity>1..2147483647</SequenceIdentity>
       <CacheSize>1</CacheSize>
       <DataType>integer</DataType>
     </sequence>
     <sequence id="28" parent="17" name="words_id_seq">
-      <ObjectId>19889</ObjectId>
-      <StateNumber>116053</StateNumber>
+      <ObjectId>20193</ObjectId>
+      <StateNumber>147663</StateNumber>
       <Owner>postgres</Owner>
       <SequenceIdentity>1..2147483647</SequenceIdentity>
       <CacheSize>1</CacheSize>
       <DataType>integer</DataType>
     </sequence>
     <table id="29" parent="17" name="dialogue">
-      <ObjectId>19869</ObjectId>
+      <ObjectId>20173</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>116052</StateNumber>
+      <StateNumber>147662</StateNumber>
     </table>
     <table id="30" parent="17" name="paragraph">
-      <ObjectId>19840</ObjectId>
+      <ObjectId>20144</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>116052</StateNumber>
+      <StateNumber>147662</StateNumber>
     </table>
     <table id="31" parent="17" name="sentence">
-      <ObjectId>19852</ObjectId>
+      <ObjectId>20156</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>116052</StateNumber>
+      <StateNumber>147662</StateNumber>
     </table>
     <table id="32" parent="17" name="words">
-      <ObjectId>19891</ObjectId>
+      <ObjectId>20195</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>116053</StateNumber>
+      <StateNumber>147663</StateNumber>
     </table>
     <routine id="33" parent="17" name="now_utc">
-      <ObjectId>19837</ObjectId>
+      <ObjectId>20141</ObjectId>
       <Owner>postgres</Owner>
       <SourceTextLength>43</SourceTextLength>
-      <StateNumber>116049</StateNumber>
+      <StateNumber>147659</StateNumber>
       <VolatilityKind>volatile</VolatilityKind>
       <ResultsDefinition>timestamp with time zone</ResultsDefinition>
       <LanguageName>sql</LanguageName>
@@ -231,7 +231,7 @@ sequence|table|19889|19891|1
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>116052</StateNumber>
+      <StateNumber>147662</StateNumber>
       <DefaultExpression>nextval(&apos;dialogue_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
@@ -239,79 +239,79 @@ sequence|table|19889|19891|1
       <Position>2</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>116052</StateNumber>
+      <StateNumber>147662</StateNumber>
       <TypeId>23</TypeId>
     </column>
     <column id="36" parent="29" name="dialogue">
       <Position>3</Position>
       <DataType>text|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>116052</StateNumber>
+      <StateNumber>147662</StateNumber>
       <TypeId>25</TypeId>
     </column>
     <column id="37" parent="29" name="dialogue_length">
       <Position>4</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>116052</StateNumber>
+      <StateNumber>147662</StateNumber>
       <TypeId>23</TypeId>
     </column>
     <column id="38" parent="29" name="flesch_reading_ease">
       <Position>5</Position>
       <DataType>integer|0s</DataType>
-      <StateNumber>116052</StateNumber>
+      <StateNumber>147662</StateNumber>
       <TypeId>23</TypeId>
     </column>
     <column id="39" parent="29" name="flesch_kincaid_grade">
       <Position>6</Position>
       <DataType>integer|0s</DataType>
-      <StateNumber>116052</StateNumber>
+      <StateNumber>147662</StateNumber>
       <TypeId>23</TypeId>
     </column>
     <column id="40" parent="29" name="sentence_ids">
       <Position>7</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>116052</StateNumber>
+      <StateNumber>147662</StateNumber>
       <TypeId>23</TypeId>
     </column>
     <column id="41" parent="29" name="created_at">
       <Position>8</Position>
       <DataType>timestamp with time zone|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>116052</StateNumber>
+      <StateNumber>147662</StateNumber>
       <DefaultExpression>now_utc()</DefaultExpression>
       <TypeId>1184</TypeId>
     </column>
     <index id="42" parent="29" name="dialogue_pkey">
-      <ObjectId>19877</ObjectId>
-      <StateNumber>116052</StateNumber>
+      <ObjectId>20181</ObjectId>
+      <StateNumber>147662</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
     <key id="43" parent="29" name="dialogue_pkey">
-      <ObjectId>19878</ObjectId>
-      <StateNumber>116052</StateNumber>
+      <ObjectId>20182</ObjectId>
+      <StateNumber>147662</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>dialogue_pkey</UnderlyingIndexName>
     </key>
     <foreign-key id="44" parent="29" name="dialogue_paragraph_id_fkey">
-      <ObjectId>19879</ObjectId>
-      <StateNumber>116052</StateNumber>
+      <ObjectId>20183</ObjectId>
+      <StateNumber>147662</StateNumber>
       <ColNames>paragraph_id</ColNames>
-      <RefTableId>19840</RefTableId>
+      <RefTableId>20144</RefTableId>
       <RefColPositions>1</RefColPositions>
       <RefTableName>paragraph</RefTableName>
       <RefKeyName>paragraph_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
     <foreign-key id="45" parent="29" name="dialogue_sentence_ids_fkey">
-      <ObjectId>19884</ObjectId>
-      <StateNumber>116052</StateNumber>
+      <ObjectId>20188</ObjectId>
+      <StateNumber>147662</StateNumber>
       <ColNames>sentence_ids</ColNames>
-      <RefTableId>19852</RefTableId>
+      <RefTableId>20156</RefTableId>
       <RefColPositions>1</RefColPositions>
       <RefTableName>sentence</RefTableName>
       <RefKeyName>sentence_pkey</RefKeyName>
@@ -321,58 +321,58 @@ sequence|table|19889|19891|1
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>116050</StateNumber>
+      <StateNumber>147660</StateNumber>
       <DefaultExpression>nextval(&apos;paragraph_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
     <column id="47" parent="30" name="paragraph">
       <Position>2</Position>
       <DataType>text|0s</DataType>
-      <StateNumber>116050</StateNumber>
+      <StateNumber>147660</StateNumber>
       <TypeId>25</TypeId>
     </column>
     <column id="48" parent="30" name="paragraph_length_by_sentence">
       <Position>3</Position>
       <DataType>integer|0s</DataType>
-      <StateNumber>116050</StateNumber>
+      <StateNumber>147660</StateNumber>
       <TypeId>23</TypeId>
     </column>
     <column id="49" parent="30" name="paragraph_length_by_word">
       <Position>4</Position>
       <DataType>integer|0s</DataType>
-      <StateNumber>116050</StateNumber>
+      <StateNumber>147660</StateNumber>
       <TypeId>23</TypeId>
     </column>
     <column id="50" parent="30" name="flesch_reading_ease">
       <Position>5</Position>
       <DataType>integer|0s</DataType>
-      <StateNumber>116050</StateNumber>
+      <StateNumber>147660</StateNumber>
       <TypeId>23</TypeId>
     </column>
     <column id="51" parent="30" name="flesch_kincaid_grade">
       <Position>6</Position>
       <DataType>integer|0s</DataType>
-      <StateNumber>116050</StateNumber>
+      <StateNumber>147660</StateNumber>
       <TypeId>23</TypeId>
     </column>
     <column id="52" parent="30" name="created_at">
       <Position>7</Position>
       <DataType>timestamp with time zone|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>116050</StateNumber>
+      <StateNumber>147660</StateNumber>
       <DefaultExpression>now_utc()</DefaultExpression>
       <TypeId>1184</TypeId>
     </column>
     <index id="53" parent="30" name="paragraph_pkey">
-      <ObjectId>19848</ObjectId>
-      <StateNumber>116050</StateNumber>
+      <ObjectId>20152</ObjectId>
+      <StateNumber>147660</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
     <key id="54" parent="30" name="paragraph_pkey">
-      <ObjectId>19849</ObjectId>
-      <StateNumber>116050</StateNumber>
+      <ObjectId>20153</ObjectId>
+      <StateNumber>147660</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>paragraph_pkey</UnderlyingIndexName>
@@ -381,7 +381,7 @@ sequence|table|19889|19891|1
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>116051</StateNumber>
+      <StateNumber>147661</StateNumber>
       <DefaultExpression>nextval(&apos;sentence_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
@@ -389,80 +389,80 @@ sequence|table|19889|19891|1
       <Position>2</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>116051</StateNumber>
+      <StateNumber>147661</StateNumber>
       <TypeId>23</TypeId>
     </column>
     <column id="57" parent="31" name="sentence">
       <Position>3</Position>
       <DataType>text|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>116051</StateNumber>
+      <StateNumber>147661</StateNumber>
       <TypeId>25</TypeId>
     </column>
     <column id="58" parent="31" name="sentence_length">
       <Position>4</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>116051</StateNumber>
+      <StateNumber>147661</StateNumber>
       <TypeId>23</TypeId>
     </column>
     <column id="59" parent="31" name="total_syllables">
       <Position>5</Position>
       <DataType>integer|0s</DataType>
-      <StateNumber>116051</StateNumber>
+      <StateNumber>147661</StateNumber>
       <TypeId>23</TypeId>
     </column>
     <column id="60" parent="31" name="rhythm_by_syllable">
       <Position>6</Position>
       <DataType>text|0s</DataType>
-      <StateNumber>116051</StateNumber>
+      <StateNumber>147661</StateNumber>
       <TypeId>25</TypeId>
     </column>
     <column id="61" parent="31" name="rhythm_by_word_len">
       <Position>7</Position>
       <DataType>text|0s</DataType>
-      <StateNumber>116051</StateNumber>
+      <StateNumber>147661</StateNumber>
       <TypeId>25</TypeId>
     </column>
     <column id="62" parent="31" name="flesch_reading_ease">
       <Position>8</Position>
       <DataType>integer|0s</DataType>
-      <StateNumber>116051</StateNumber>
+      <StateNumber>147661</StateNumber>
       <TypeId>23</TypeId>
     </column>
     <column id="63" parent="31" name="flesch_kincaid_grade">
       <Position>9</Position>
       <DataType>integer|0s</DataType>
-      <StateNumber>116051</StateNumber>
+      <StateNumber>147661</StateNumber>
       <TypeId>23</TypeId>
     </column>
     <column id="64" parent="31" name="created_at">
       <Position>10</Position>
       <DataType>timestamp with time zone|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>116051</StateNumber>
+      <StateNumber>147661</StateNumber>
       <DefaultExpression>now_utc()</DefaultExpression>
       <TypeId>1184</TypeId>
     </column>
     <index id="65" parent="31" name="sentence_pkey">
-      <ObjectId>19860</ObjectId>
-      <StateNumber>116051</StateNumber>
+      <ObjectId>20164</ObjectId>
+      <StateNumber>147661</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
     <key id="66" parent="31" name="sentence_pkey">
-      <ObjectId>19861</ObjectId>
-      <StateNumber>116051</StateNumber>
+      <ObjectId>20165</ObjectId>
+      <StateNumber>147661</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>sentence_pkey</UnderlyingIndexName>
     </key>
     <foreign-key id="67" parent="31" name="sentence_paragraph_id_fkey">
-      <ObjectId>19862</ObjectId>
-      <StateNumber>116051</StateNumber>
+      <ObjectId>20166</ObjectId>
+      <StateNumber>147661</StateNumber>
       <ColNames>paragraph_id</ColNames>
-      <RefTableId>19840</RefTableId>
+      <RefTableId>20144</RefTableId>
       <RefColPositions>1</RefColPositions>
       <RefTableName>paragraph</RefTableName>
       <RefKeyName>paragraph_pkey</RefKeyName>
@@ -472,7 +472,7 @@ sequence|table|19889|19891|1
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>116053</StateNumber>
+      <StateNumber>147663</StateNumber>
       <DefaultExpression>nextval(&apos;words_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
@@ -480,48 +480,48 @@ sequence|table|19889|19891|1
       <Position>2</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>116053</StateNumber>
+      <StateNumber>147663</StateNumber>
       <TypeId>23</TypeId>
     </column>
     <column id="70" parent="32" name="word">
       <Position>3</Position>
       <DataType>text|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>116053</StateNumber>
+      <StateNumber>147663</StateNumber>
       <TypeId>25</TypeId>
     </column>
     <column id="71" parent="32" name="word_length">
       <Position>4</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>116053</StateNumber>
+      <StateNumber>147663</StateNumber>
       <TypeId>23</TypeId>
     </column>
     <column id="72" parent="32" name="syllables">
       <Position>5</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>116053</StateNumber>
+      <StateNumber>147663</StateNumber>
       <TypeId>23</TypeId>
     </column>
     <column id="73" parent="32" name="created_at">
       <Position>6</Position>
       <DataType>timestamp with time zone|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>116053</StateNumber>
+      <StateNumber>147663</StateNumber>
       <DefaultExpression>now_utc()</DefaultExpression>
       <TypeId>1184</TypeId>
     </column>
     <index id="74" parent="32" name="words_pkey">
-      <ObjectId>19899</ObjectId>
-      <StateNumber>116053</StateNumber>
+      <ObjectId>20203</ObjectId>
+      <StateNumber>147663</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
     <key id="75" parent="32" name="words_pkey">
-      <ObjectId>19900</ObjectId>
-      <StateNumber>116053</StateNumber>
+      <ObjectId>20204</ObjectId>
+      <StateNumber>147663</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>words_pkey</UnderlyingIndexName>

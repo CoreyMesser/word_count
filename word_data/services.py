@@ -3,7 +3,7 @@ import math
 from pyphen import Pyphen
 from sqlalchemy import update
 from word_data.database import db_session
-from word_data.models import Dialogue, Paragraph, Sentence, Words, ParagraphTemplate, User
+from word_data.models import Dialogue, Paragraph, Sentence, Words, ParagraphTemplate, User, Title
 from word_data.decorators import time_tracker
 
 
@@ -231,3 +231,20 @@ class DatabaseServices(object):
     def get_user(self, username):
         db = db_session()
         return db.query(User).filter_by(username=username).first()
+
+    def get_email(self, email):
+        db = db_session()
+        return db.query(User).filter_by(email=email).first()
+
+    def get_titles(self, username):
+        db = db_session()
+        title_list = []
+        title_ids = db.query(User.title_ids).filter(username=username).first()
+        for i in int(title_ids.split()):
+            title_list.append(db.query(Title.title).filter(id=i).first())
+        return title_list
+
+    def add_commit(self, model):
+        db = db_session()
+        db.add(model)
+        db.commit()

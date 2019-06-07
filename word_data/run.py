@@ -1,2 +1,3 @@
-from word_data.main import app
+from word_data.main import create_app
 
+app = create_app()

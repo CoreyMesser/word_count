@@ -3,7 +3,7 @@ import math
 from pyphen import Pyphen
 from sqlalchemy import update
 from word_data.database import db_session
-from word_data.models import Dialogue, Paragraph, Sentence, Words, ParagraphTemplate
+from word_data.models import Dialogue, Paragraph, Sentence, Words, ParagraphTemplate, User
 from word_data.decorators import time_tracker
 
 
@@ -227,3 +227,7 @@ class DatabaseServices(object):
         db = db_session()
         sess = db.query(Paragraph).filter(Paragraph.id == paragraph_id).first()
         return sess.paragraph_length_by_sentence
+
+    def get_user(self, username):
+        db = db_session()
+        return db.query(User).filter_by(username=username).first()

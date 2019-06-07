@@ -1,1 +1,4 @@
 SET TIMEZONE = 'UTC';
+
+INSERT INTO "users" ("username", "password")
+VALUES ('pibble', 'fiasco')

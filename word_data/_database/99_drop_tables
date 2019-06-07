@@ -1,3 +1,5 @@
+DROP TABLE public.users;
+DROP TABLE public.titles;
 DROP TABLE public.dialogue;
 DROP TABLE public.words;
 DROP TABLE public.sentence;

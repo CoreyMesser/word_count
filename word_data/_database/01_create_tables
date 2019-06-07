@@ -7,56 +7,72 @@ $$
 LANGUAGE SQL;
 
 -- regular table structure
+CREATE TABLE users
+(
+    id         SERIAL PRIMARY KEY       NOT NULL,
+    username   TEXT                     NOT NULL,
+    password   TEXT                     NOT NULL,
+    title_ids  TEXT                     NULL,
+    created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now_utc()
+);
+
+CREATE TABLE titles
+(
+    id         SERIAL PRIMARY KEY       NOT NULL,
+    title      TEXT                     NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now_utc()
+);
 
 CREATE TABLE paragraph
 (
-  id                   SERIAL PRIMARY KEY           NOT NULL,
-  paragraph                    TEXT                     NULL,
-  paragraph_length_by_sentence INT                      NULL,
-  paragraph_length_by_word     INT                      NULL,
-  flesch_reading_ease          INT                      NULL,
-  flesch_kincaid_grade         INT                      NULL,
-  created_at                   TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now_utc()
+    id                           SERIAL PRIMARY KEY       NOT NULL,
+    title_id                     INT                      NOT NULL,
+    paragraph                    TEXT                     NULL,
+    paragraph_length_by_sentence INT                      NULL,
+    paragraph_length_by_word     INT                      NULL,
+    flesch_reading_ease          INT                      NULL,
+    flesch_kincaid_grade         INT                      NULL,
+    created_at                   TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now_utc()
 );
 
 CREATE TABLE sentence
 (
-  id                   SERIAL PRIMARY KEY       NOT NULL,
-  paragraph_id         INT                      NOT NULL,
-  sentence             TEXT                     NOT NULL,
-  sentence_length      INT                      NOT NULL,
-  total_syllables      INT                      NULL,
-  rhythm_by_syllable   TEXT                      NULL,
-  rhythm_by_word_len   TEXT                      NULL,
-  flesch_reading_ease  INT                      NULL,
-  flesch_kincaid_grade INT                      NULL,
-  created_at           TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now_utc(),
+    id                   SERIAL PRIMARY KEY       NOT NULL,
+    paragraph_id         INT                      NOT NULL,
+    sentence             TEXT                     NOT NULL,
+    sentence_length      INT                      NOT NULL,
+    total_syllables      INT                      NULL,
+    rhythm_by_syllable   TEXT                     NULL,
+    rhythm_by_word_len   TEXT                     NULL,
+    flesch_reading_ease  INT                      NULL,
+    flesch_kincaid_grade INT                      NULL,
+    created_at           TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now_utc(),
 
-  FOREIGN KEY (paragraph_id) REFERENCES paragraph (id)
+    FOREIGN KEY (paragraph_id) REFERENCES paragraph (id)
 );
 
 CREATE TABLE dialogue
 (
-  id                   SERIAL PRIMARY KEY       NOT NULL,
-  paragraph_id         INT                      NOT NULL,
-  dialogue             TEXT                     NOT NULL,
-  dialogue_length      INT                      NOT NULL,
-  flesch_reading_ease  INT                      NULL,
-  flesch_kincaid_grade INT                      NULL,
-  sentence_ids         INT                      NOT NULL,
-  created_at           TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now_utc(),
+    id                   SERIAL PRIMARY KEY       NOT NULL,
+    paragraph_id         INT                      NOT NULL,
+    dialogue             TEXT                     NOT NULL,
+    dialogue_length      INT                      NOT NULL,
+    flesch_reading_ease  INT                      NULL,
+    flesch_kincaid_grade INT                      NULL,
+    sentence_ids         INT                      NOT NULL,
+    created_at           TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now_utc(),
 
-  FOREIGN KEY (paragraph_id) REFERENCES paragraph (id),
-  FOREIGN KEY (sentence_ids) REFERENCES sentence (id)
+    FOREIGN KEY (paragraph_id) REFERENCES paragraph (id),
+    FOREIGN KEY (sentence_ids) REFERENCES sentence (id)
 
 );
 
 CREATE TABLE words
 (
-  id                   SERIAL PRIMARY KEY       NOT NULL,
-  sentence_id          INT                      NOT NULL,
-  word                 TEXT                     NOT NULL,
-  word_length          INT                      NOT NULL,
-  syllables            INT                      NOT NULL,
-  created_at           TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now_utc()
+    id          SERIAL PRIMARY KEY       NOT NULL,
+    sentence_id INT                      NOT NULL,
+    word        TEXT                     NOT NULL,
+    word_length INT                      NOT NULL,
+    syllables   INT                      NOT NULL,
+    created_at  TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now_utc()
 );

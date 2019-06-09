@@ -248,3 +248,7 @@ class DatabaseServices(object):
         db = db_session()
         db.add(model)
         db.commit()
+
+    def pagination(self):
+        # User.followed_posts().paginate(1, 20, False).items
+        pass

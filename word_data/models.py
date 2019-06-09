@@ -3,7 +3,7 @@ from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
-# from word_data.main import login
+# from word_data.auth import login
 
 Base = declarative_base()
 metadata = Base.metadata

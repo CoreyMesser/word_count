@@ -1,6 +1,6 @@
 from flask import render_template
-from word_data import db
-from word_data.auth import bp
+from word_data.app import db
+from word_data.app.auth import bp
 
 @bp.errorhandler(404)
 def not_found_error(error):

@@ -1,6 +1,6 @@
 import os
 import logging
-from logging.handlers import SMTPHandler, RotatingFileHandler
+from logging.handlers import RotatingFileHandler
 
 from word_data.config import Config
 from flask import Flask
@@ -22,13 +22,13 @@ def create_app(config_class=Config):
     login.init_app(app)
     bootstrap.init_app(app)
 
-    from word_data.auth import bp as auth_bp
+    from word_data.app.auth import bp as auth_bp
     app.register_blueprint(auth_bp, url_prefix='/auth')
 
-    from word_data.errors import bp as errors_bp
+    from word_data.app.errors import bp as errors_bp
     app.register_blueprint(errors_bp)
 
-    from word_data.main import bp as main_bp
+    from word_data.app.main import bp as main_bp
     app.register_blueprint(main_bp)
 
     if not app.debug and not app.testing:
@@ -55,4 +55,10 @@ def create_app(config_class=Config):
     return app
 
 
-import word_data.models
+from word_data.app.auth import routes
+
+
+# from flask import Flask
+#
+# app = Flask(__name__)
+# from word_data.app.auth import routes

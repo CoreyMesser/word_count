@@ -3,8 +3,8 @@ from flask_login import current_user, login_user, logout_user, login_required
 
 from word_data.services import DatabaseServices
 
-from word_data.auth import bp
-from word_data.auth.forms import LoginForm, RegistrationForm
+from word_data.app.auth import bp
+from word_data.app.auth.forms import LoginForm, RegistrationForm
 
 from word_data.models import User
 

@@ -1,10 +1,8 @@
 import re
 import math
 from pyphen import Pyphen
-from sqlalchemy import update
 from word_data.database import db_session
-from word_data.models import Dialogue, Paragraph, Sentence, Words, ParagraphTemplate, User, Title
-from word_data.decorators import time_tracker
+from word_data.models import Paragraph, Sentence, Words, ParagraphTemplate, User, Title
 
 
 def _log(message):

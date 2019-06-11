@@ -1,3 +1,3 @@
-from word_data.auth import app
+from word_data import create_app
 
 app = create_app()

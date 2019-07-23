@@ -1,1 +1,7 @@
 SET TIMEZONE = 'UTC';
+
+INSERT INTO "users" ("username", "password", "email", "title_ids")
+VALUES ('pibble', 'fiasco', 'tiredorangecat@gmail.com', ('1, 3, 2'))
+
+insert into "titles" ("title")
+values ('fiasco'), ('eden'), ('solaris')

@@ -27,7 +27,7 @@ CREATE TABLE titles
 CREATE TABLE paragraph
 (
     id                           SERIAL PRIMARY KEY       NOT NULL,
-    title_id                     INT                      NOT NULL,
+    title_id                     INT                      NULL,
     paragraph                    TEXT                     NULL,
     paragraph_length_by_sentence INT                      NULL,
     paragraph_length_by_word     INT                      NULL,

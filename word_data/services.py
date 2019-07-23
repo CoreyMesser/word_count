@@ -3,7 +3,7 @@ import math
 from pyphen import Pyphen
 from sqlalchemy import update
 from word_data.database import db_session
-from word_data.models import Dialogue, Paragraph, Sentence, Words, ParagraphTemplate
+from word_data.models import Dialogue, Paragraph, Sentence, Words, ParagraphTemplate, Title
 from word_data.decorators import time_tracker
 
 
@@ -16,32 +16,43 @@ class WordCount(object):
     def __init__(self):
         self.db_service = DatabaseServices()
 
-    def open_file(self, file):
+    def open_file(self, path, filename):
         """
         Opens file and parses it into chunks which is then written to the data base
         :param file:
         :return:
         """
+        file = path + filename
         with open(file=file, encoding='utf=8') as raw_file:
             db = db_session()
             chunk_id, sent_id = 1, 1
-            self.parse_paragraph(chunk_id, db, raw_file, sent_id)
+            title_id = self.parse_title(db, filename)
+            self.parse_paragraph(chunk_id, db, raw_file, sent_id, title_id)
+
+    def parse_title(self, db, filename):
+        ti = Title()
+        ti.title = filename
+        db.add(ti)
+        db.commit()
+        row = db.query(Title).filter(Title.title == filename).first()
+        return row.id
 
     # @time_tracker(_log)
-    def parse_paragraph(self, chunk_id, db, raw_file, sent_id):
+    def parse_paragraph(self, chunk_id, db, raw_file, sent_id, title_id):
         for chunk in raw_file:
             if len(chunk) > 1:
                 pc = Paragraph()
                 pc.paragraph = chunk
                 pc.paragraph_length_by_sentence = len(self.paragraph_cleaner(chunk=chunk))
                 pc.paragraph_length_by_word = self.thing_counter(chunk=chunk)
+                pc.title_id = title_id
                 db.add(pc)
                 db.commit()
                 sent_id = self.parse_sentence(chunk=chunk, paragraph_id=chunk_id, sentence_id=sent_id)
                 chunk_id += 1
 
-    def parse_file(self, file):
-        self.open_file(file=file)
+    def parse_file(self, path, file):
+        self.open_file(path=path, filename=file)
 
     # @time_tracker(_log)
     def parse_sentence(self, chunk, paragraph_id, sentence_id):

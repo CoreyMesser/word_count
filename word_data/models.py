@@ -38,6 +38,7 @@ class Paragraph(Base):
     __tablename__ = 'paragraph'
 
     id = Column(Integer, primary_key=True, server_default=text("nextval('paragraph_id_seq'::regclass)"))
+    title_id = Column(Integer)
     paragraph = Column(Text)
     paragraph_length_by_sentence = Column(Integer)
     paragraph_length_by_word = Column(Integer)

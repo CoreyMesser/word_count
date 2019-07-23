@@ -17,17 +17,17 @@ class Parse_File(object):
     dbs = DatabaseServices()
     rs = ReadingScores()
 
-    def run(self, file):
+    def run(self, path, file):
         print('Parsing File...')
-        self.run_parse(file=file)
+        self.run_parse(path=path, file=file)
         print('Successfully Parsed File')
         print('Calculating Scores...')
         self.run_scores()
         print('Successfully Calculated Scores')
 
     @time_tracker(_log)
-    def run_parse(self, file):
-        self.wc.parse_file(file=file)
+    def run_parse(self, path, file):
+        self.wc.parse_file(path=path, file=file)
 
     @time_tracker(_log)
     def run_scores(self):
@@ -35,9 +35,10 @@ class Parse_File(object):
 
 
 if __name__ == '__main__':
-    file = '/home/pibblefiasco/Development/word_count/writing_samples/HRPG.txt'
+    path = '/home/pibblefiasco/Development/word_count/writing_samples/'
+    filename = 'muchado_a2s1.txt'
     pf = Parse_File()
-    pf.run(file=file)
+    pf.run(path=path, file=filename)
     # pf = Parse_File()
     # pf.run_parse(file=file)
     # pf = Parse_File()
